@@ -1,4 +1,5 @@
-import panels.MainPanel;
+import utils.MainPanel;
+import utils.WritingFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +38,7 @@ public class DailySentence {
     frame.add(menuPanel, BorderLayout.PAGE_START);
 
     menuPanel.add(createMainButton());
+    menuPanel.add(createWritingButton());
   }
 
   public JButton createMainButton() {
@@ -47,6 +49,17 @@ public class DailySentence {
     });
 
     return mainButton;
+  }
+
+  private JButton createWritingButton() {
+    JButton writingButton = new JButton("글귀 작성하기");
+    writingButton.addActionListener(event -> {
+      JFrame writingFrame = new WritingFrame();
+//      showContentPanel(writingFrame
+//     );
+    });
+
+    return writingButton;
   }
 
   private void showContentPanel(JPanel panel) {

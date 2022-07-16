@@ -1,17 +1,27 @@
+import models.Writing;
 import utils.MainPanel;
 import utils.WritingFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DailySentence {
+  private List<Writing> writings;
+
   private JFrame frame;
 
   private JPanel contentPanel;
+  private MainPanel mainPanel;
 
   public static void main(String[] args) {
     DailySentence application = new DailySentence();
     application.run();
+  }
+
+  public DailySentence() {
+    writings = new ArrayList<>();
   }
 
   public void run() {
@@ -24,7 +34,7 @@ public class DailySentence {
 
   public void initFrame() {
     frame = new JFrame("Daily Sentence");
-    frame.setSize(800,800);
+    frame.setSize(800, 800);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
@@ -44,7 +54,7 @@ public class DailySentence {
   public JButton createMainButton() {
     JButton mainButton = new JButton("메인 페이지");
     mainButton.addActionListener(event -> {
-      JPanel mainPanel = new MainPanel();
+      mainPanel = new MainPanel(writings);
       showContentPanel(mainPanel);
     });
 
@@ -54,12 +64,18 @@ public class DailySentence {
   private JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JFrame writingFrame = new WritingFrame();
-//      showContentPanel(writingFrame
-//     );
+      JPanel writingFrame = new WritingFrame(writings, mainPanel, contentPanel);
+
+      showWritingPanel(writingFrame);
     });
 
     return writingButton;
+  }
+
+  private void showWritingPanel(JPanel panel) {
+    frame.add(panel);
+    panel.setVisible(true);
+    frame.setVisible(true);
   }
 
   private void showContentPanel(JPanel panel) {

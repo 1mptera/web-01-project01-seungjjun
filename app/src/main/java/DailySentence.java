@@ -1,4 +1,7 @@
+import models.Book;
 import models.Post;
+import org.checkerframework.checker.units.qual.A;
+import utils.BestsellerPanel;
 import utils.MainPanel;
 import utils.WritingPanel;
 
@@ -14,6 +17,7 @@ import java.util.Random;
 
 public class DailySentence extends JFrame{
   private List<Post> posts;
+  private List<Book> books;
 
   private JFrame frame;
 
@@ -25,6 +29,7 @@ public class DailySentence extends JFrame{
     this.mood = mood;
 
     posts = new ArrayList<>();
+    books = new ArrayList<>();
 
     PostLoader postLoader = new PostLoader();
 
@@ -59,6 +64,7 @@ public class DailySentence extends JFrame{
 
     menuPanel.add(createMainButton());
     menuPanel.add(createWritingButton());
+    menuPanel.add(createBestsellerButton());
   }
 
   public JButton createMainButton() {
@@ -76,10 +82,20 @@ public class DailySentence extends JFrame{
     writingButton.addActionListener(event -> {
       JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel);
 
-      showWritingPanel(writingPanel);
+      showPanel(writingPanel);
     });
 
     return writingButton;
+  }
+
+  public JButton createBestsellerButton() {
+    JButton bestsellerButton = new JButton("베스트셀러");
+    bestsellerButton.addActionListener(event -> {
+      JPanel bestsellerPanel = new BestsellerPanel(books);
+
+      showPanel(bestsellerPanel);
+    });
+    return bestsellerButton;
   }
 
   public void randomSentence(String mood) {
@@ -114,7 +130,7 @@ public class DailySentence extends JFrame{
     return moods[3];
   }
 
-  public void showWritingPanel(JPanel panel) {
+  public void showPanel(JPanel panel) {
     frame.add(panel);
     panel.setVisible(true);
     frame.setVisible(true);

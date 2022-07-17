@@ -1,6 +1,5 @@
 import models.Book;
 import models.Post;
-import org.checkerframework.checker.units.qual.A;
 import utils.BestsellerPanel;
 import utils.MainPanel;
 import utils.WritingPanel;
@@ -32,14 +31,17 @@ public class DailySentence extends JFrame{
     books = new ArrayList<>();
 
     PostLoader postLoader = new PostLoader();
-
     posts = postLoader.loadPosts();
+
+    BookLoader bookLoader = new BookLoader();
+    books = bookLoader.loadBooks();
 
     initFrame();
     initMenuButtons();
     initContentPanel(mood);
 
     postWriter();
+    bookWriter();
 
     frame.setVisible(true);
   }
@@ -93,7 +95,7 @@ public class DailySentence extends JFrame{
     bestsellerButton.addActionListener(event -> {
       JPanel bestsellerPanel = new BestsellerPanel(books);
 
-      showPanel(bestsellerPanel);
+      showContentPanel(bestsellerPanel);
     });
     return bestsellerButton;
   }
@@ -151,6 +153,20 @@ public class DailySentence extends JFrame{
         PostLoader postLoader = new PostLoader();
         try {
           postLoader.writePost(posts);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    });
+  }
+
+  public void bookWriter() {
+    frame.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent event) {
+        BookLoader bookLoader = new BookLoader();
+        try {
+          bookLoader.writeBook(books);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }

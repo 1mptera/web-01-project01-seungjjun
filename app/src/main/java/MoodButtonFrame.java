@@ -60,7 +60,7 @@ public class MoodButtonFrame {
 
   public void initFrame() {
     buttonFrame = new JFrame("기분에 맞는 버튼을 선택하세요");
-    buttonFrame.setSize(400,400);
+    buttonFrame.setSize(400,300);
     buttonFrame.setLayout(new FlowLayout());
 //    buttonFrame.setLocationRelativeTo(null);
     buttonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +74,6 @@ public class MoodButtonFrame {
 
 //    moodButtonsPanel.setLayout(gridBagLayout);
 //    gridBagConstraints.fill = GridBagConstraints.BOTH;
-
 
     moodButtonsPanel = new JPanel();
     buttonFrame.add(moodButtonsPanel);

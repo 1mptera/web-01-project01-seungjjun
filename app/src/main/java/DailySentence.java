@@ -64,7 +64,7 @@ public class DailySentence extends JFrame{
   public JButton createMainButton() {
     JButton mainButton = new JButton("글 목록 보기");
     mainButton.addActionListener(event -> {
-      mainPanel = new MainPanel(posts);
+      mainPanel = new MainPanel(posts, mainPanel, contentPanel);
       showContentPanel(mainPanel);
     });
 
@@ -93,8 +93,10 @@ public class DailySentence extends JFrame{
       String sentence = parsePostSentence(randomPost);
 
       if(postMood.equals(mood)) {
-        JLabel label = new JLabel(sentence);
-        contentPanel.add(label);
+        JLabel sentenceLabel = new JLabel(sentence);
+        sentenceLabel.setFont(new Font("Serif", Font.BOLD, 20));
+
+        contentPanel.add(sentenceLabel);
         isClickedMoodEqualsRandomMood = false;
       }
     }

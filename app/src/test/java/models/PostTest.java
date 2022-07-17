@@ -14,6 +14,13 @@ class PostTest {
     assertEquals("2022년 6월 고3 모의고사 필적 확인란 문구", post.content());
   }
 
+  @Test
+  void state() {
+    Post post = new Post("나에게 창의성은 안먹고는 살 수 없는 약과 같다.", "Cecil B. DeMille");
+
+    assertEquals("EXISTENCE", post.state());
+  }
+
 
   @Test
   void deletion() {

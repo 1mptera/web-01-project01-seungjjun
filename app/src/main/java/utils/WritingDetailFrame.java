@@ -3,6 +3,7 @@ package utils;
 import models.Post;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -10,15 +11,19 @@ import java.util.List;
 public class WritingDetailFrame extends JFrame {
   private List<Post> posts;
   private Post post;
+  private JPanel mainPanel;
 
   private JFrame detailFrame;
   private JPanel detailPanel;
 
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
+  private JPanel contentPanel;
 
-  public WritingDetailFrame(List<Post> posts, Post post) {
+  public WritingDetailFrame(List<Post> posts, Post post, JPanel mainPanel, JPanel contentPanel) {
     this.posts = posts;
     this.post = post;
+    this.mainPanel = mainPanel;
+    this.contentPanel = contentPanel;
 
     detailFrame = new JFrame();
     detailFrame.setSize(800, 800);
@@ -34,6 +39,7 @@ public class WritingDetailFrame extends JFrame {
     detailPanel.setLayout(null);
 
     detailPanel.add(createContent());
+    detailPanel.add(createMood());
     detailPanel.add(createDeleteButton());
     detailPanel.add(cteateModifyButton());
 
@@ -43,8 +49,15 @@ public class WritingDetailFrame extends JFrame {
   private JLabel createContent() {
     String content = post.content();
     JLabel label = new JLabel(content);
-    label.setBounds(10, 10, 700, 600);
+    label.setBounds(10, 20, 800, 100);
     return label;
+  }
+
+  private JLabel createMood() {
+    String mood = post.mood();
+    JLabel moodLabel = new JLabel("카테고리: " + mood);
+    moodLabel.setBounds(680,0,100,30);
+    return moodLabel;
   }
 
   private JButton cteateModifyButton() {
@@ -68,11 +81,6 @@ public class WritingDetailFrame extends JFrame {
 
       JTextArea contentBox = new JTextArea();
       contentBox.setBounds(50, 60, 700, 600);
-      contentBox.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent e) {
-          contentBox.setText("");
-        }
-      });
       contentBox.setText(post.content());
       detailPanel.add(contentBox);
 
@@ -82,6 +90,9 @@ public class WritingDetailFrame extends JFrame {
         post.modifyMood(String.valueOf(moodComboBox.getSelectedItem()));
 
         detailFrame.setVisible(false);
+
+        mainPanel = new MainPanel(posts, mainPanel, contentPanel);
+        showContentPanel(mainPanel);
       });
 
       detailPanel.setVisible(false);
@@ -96,7 +107,17 @@ public class WritingDetailFrame extends JFrame {
     deleteButton.addActionListener(event -> {
       post.deletion();
       detailFrame.setVisible(false);
+      mainPanel = new MainPanel(posts, mainPanel, contentPanel);
+      showContentPanel(mainPanel);
+
     });
     return deleteButton;
+  }
+
+  private void showContentPanel(JPanel mainPanel) {
+    contentPanel.removeAll();
+    contentPanel.add(mainPanel);
+    contentPanel.setVisible(false);
+    contentPanel.setVisible(true);
   }
 }

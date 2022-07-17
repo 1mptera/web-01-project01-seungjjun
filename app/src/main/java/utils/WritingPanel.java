@@ -1,21 +1,21 @@
 package utils;
 
-import models.Writing;
+import models.Post;
 
 import javax.swing.*;
 import java.util.List;
 
-public class WritingFrame extends JPanel {
-  private List<Writing> writings;
+public class WritingPanel extends JPanel {
+  private List<Post> posts;
 
   private JPanel mainPanel;
   private JPanel contentPanel;
 
-  public WritingFrame(List<Writing> writings,
+  public WritingPanel(List<Post> posts,
                       JPanel mainPanel,
                       JPanel contentPanel) {
 
-    this.writings = writings;
+    this.posts = posts;
     this.mainPanel = mainPanel;
     this.contentPanel = contentPanel;
 
@@ -30,6 +30,8 @@ public class WritingFrame extends JPanel {
     this.add(titleBox);
 
     JTextArea contentBox = new JTextArea();
+    contentBox.setText("어디서 읽은 글귀인지 적어주세요");
+    contentBox.setLineWrap(true);
     contentBox.setBounds(50, 60, 700, 600);
     this.add(contentBox);
 
@@ -38,11 +40,11 @@ public class WritingFrame extends JPanel {
       String sentence = titleBox.getText();
       String content = contentBox.getText();
 
-      writings.add(new Writing(sentence, content));
+      posts.add(new Post(sentence, content));
 
       refreshPanel();
 
-      mainPanel = new MainPanel(writings);
+      mainPanel = new MainPanel(posts);
 
       showContentPanel(mainPanel);
     });

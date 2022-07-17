@@ -36,13 +36,21 @@ class PostTest {
   }
 
   @Test
+  void mood() {
+    Post post = new Post("도망쳐서 도착한 곳에 낙원은 없다.", "베르세르크 중 한 구절", "EXISTENCE", "인생");
+
+    assertEquals("인생", post.mood());
+  }
+
+  @Test
   void toCsvROw() {
     Post post = new Post(
         "젊은이여 그 길은 너의 것이다.",
         "2022년 6월 고3 모의고사 필적 확인란 문구",
-        "DELETION");
+        "DELETION",
+        "인생");
 
-    assertEquals("젊은이여 그 길은 너의 것이다.,2022년 6월 고3 모의고사 필적 확인란 문구,DELETION",
+    assertEquals("젊은이여 그 길은 너의 것이다.,2022년 6월 고3 모의고사 필적 확인란 문구,DELETION,인생",
         post.toCsvRow());
   }
 }

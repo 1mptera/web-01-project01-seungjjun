@@ -37,6 +37,10 @@ public class PostLoader {
   public Post parsePost(String post) {
     String[] postInformation = post.split(",");
 
-    return new Post(postInformation[0], postInformation[1], postInformation[2]);
+    return new Post(
+        postInformation[0],
+        postInformation[1],
+        postInformation[2],
+        postInformation[3]);
   }
 }

@@ -3,6 +3,8 @@ package utils;
 import models.Post;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class WritingDetailFrame extends JFrame {
@@ -66,10 +68,15 @@ public class WritingDetailFrame extends JFrame {
 
       JTextArea contentBox = new JTextArea();
       contentBox.setBounds(50, 60, 700, 600);
+      contentBox.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+          contentBox.setText("");
+        }
+      });
       contentBox.setText(post.content());
       detailPanel.add(contentBox);
 
-      internalModifiyButton.addActionListener(event1 -> {
+      internalModifiyButton.addActionListener(event2 -> {
         post.modifyTitle(titleBox.getText());
         post.modifyContent(contentBox.getText());
         post.modifyMood(String.valueOf(moodComboBox.getSelectedItem()));
@@ -82,7 +89,6 @@ public class WritingDetailFrame extends JFrame {
     });
     return modifyButton;
   }
-
 
   private JButton createDeleteButton() {
     JButton deleteButton = new JButton("삭제하기");

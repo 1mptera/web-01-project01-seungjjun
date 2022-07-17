@@ -4,6 +4,7 @@ public class Post {
   private static final String EXISTENCE = "EXISTENCE";
   private static final String DELETION = "DELETION";
 
+  private String mood;
   private String state;
   private String title;
   private String content;
@@ -14,10 +15,11 @@ public class Post {
     this.state = Post.EXISTENCE;
   }
 
-  public Post(String title, String content, String state) {
+  public Post(String title, String content, String state, String mood) {
     this.title = title;
     this.content = content;
     this.state = state;
+    this.mood = mood;
   }
 
   public String state() {
@@ -32,8 +34,12 @@ public class Post {
     return content;
   }
 
+  public String mood() {
+    return mood;
+  }
+
   public void deletion() {
-    this.state = DELETION;
+    this.state = Post.DELETION;
   }
 
   public void modifyTitle(String title) {
@@ -44,7 +50,11 @@ public class Post {
     this.content = content;
   }
 
+  public void modifyMood(String mood) {
+    this.mood = mood;
+  }
+
   public String toCsvRow() {
-    return title + "," + content + "," + state;
+    return title + "," + content + "," + state + "," + mood;
   }
 }

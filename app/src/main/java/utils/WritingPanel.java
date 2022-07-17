@@ -3,6 +3,8 @@ package utils;
 import models.Post;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class WritingPanel extends JPanel {
@@ -39,6 +41,11 @@ public class WritingPanel extends JPanel {
 
     JTextArea contentBox = new JTextArea();
     contentBox.setText("어디서 읽은 글귀인지 적어주세요");
+    contentBox.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        contentBox.setText("");
+      }
+    });
     contentBox.setLineWrap(true);
     contentBox.setBounds(50, 60, 700, 600);
     this.add(contentBox);
@@ -54,7 +61,7 @@ public class WritingPanel extends JPanel {
 
       refreshPanel();
 
-      mainPanel = new MainPanel(posts);
+      mainPanel = new MainPanel(posts, mainPanel, contentPanel);
 
       showContentPanel(mainPanel);
     });

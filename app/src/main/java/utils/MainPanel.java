@@ -23,13 +23,13 @@ public class MainPanel extends JPanel {
   }
 
   public void sentencePanel() {
-    for (Post writing : posts) {
-      if (!writing.state().equals("DELETION")) {
-        JLabel sentenceLabel = new JLabel(writing.title());
+    for (Post post : posts) {
+      if (!post.state().equals("DELETION")) {
+        JLabel sentenceLabel = new JLabel(post.title());
         sentenceLabel.setFont(new Font("Serif", Font.BOLD, 15));
         sentenceLabel.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
-            JFrame writingDetailFrame = new WritingDetailFrame(posts, writing, mainPanel, contentPanel);
+            JFrame writingDetailFrame = new WritingDetailFrame(posts, post, mainPanel, contentPanel);
           }
         });
 

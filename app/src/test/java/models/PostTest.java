@@ -34,4 +34,15 @@ class PostTest {
     assertEquals("지금 6개월 놀면 이후 60년 동안 고통을 만들어 낼 수도 있습니다", post.title());
     assertEquals("메가테라 디스코드 공지 홀맨님이 남겨주신 코멘트 (6/18)", post.content());
   }
+
+  @Test
+  void toCsvROw() {
+    Post post = new Post(
+        "젊은이여 그 길은 너의 것이다.",
+        "2022년 6월 고3 모의고사 필적 확인란 문구",
+        "DELETION");
+
+    assertEquals("젊은이여 그 길은 너의 것이다.,2022년 6월 고3 모의고사 필적 확인란 문구,DELETION",
+        post.toCsvRow());
+  }
 }

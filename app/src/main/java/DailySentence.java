@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DailySentence extends JFrame{
   private List<Post> posts;
@@ -31,7 +32,7 @@ public class DailySentence extends JFrame{
 
     initFrame();
     initMenuButtons();
-    initContentPanel();
+    initContentPanel(mood);
 
     postWriter();
 
@@ -41,11 +42,14 @@ public class DailySentence extends JFrame{
   public void initFrame() {
     frame = new JFrame("Daily Sentence");
     frame.setSize(800, 800);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
   }
 
-  public void initContentPanel() {
+  public void initContentPanel(String mood) {
     contentPanel = new JPanel();
+
+    randomSentence(mood);
+
     frame.add(contentPanel);
   }
 
@@ -58,7 +62,7 @@ public class DailySentence extends JFrame{
   }
 
   public JButton createMainButton() {
-    JButton mainButton = new JButton("메인 페이지");
+    JButton mainButton = new JButton("글 목록 보기");
     mainButton.addActionListener(event -> {
       mainPanel = new MainPanel(posts);
       showContentPanel(mainPanel);
@@ -67,7 +71,7 @@ public class DailySentence extends JFrame{
     return mainButton;
   }
 
-  private JButton createWritingButton() {
+  public JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
       JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel);
@@ -76,6 +80,36 @@ public class DailySentence extends JFrame{
     });
 
     return writingButton;
+  }
+
+  public void randomSentence(String mood) {
+    boolean isClickedMoodEqualsRandomMood = true;
+    while (isClickedMoodEqualsRandomMood) {
+      Random random = new Random();
+
+      String randomPost = String.valueOf(posts.get(random.nextInt(posts.size())));
+
+      String postMood = parsePostMood(randomPost);
+      String sentence = parsePostSentence(randomPost);
+
+      if(postMood.equals(mood)) {
+        JLabel label = new JLabel(sentence);
+        contentPanel.add(label);
+        isClickedMoodEqualsRandomMood = false;
+      }
+    }
+  }
+
+  public String parsePostSentence(String randomPost) {
+    String[] sentences = randomPost.split(",");
+
+    return sentences[0];
+  }
+
+  public String parsePostMood(String randomPost) {
+    String[] moods = randomPost.split(",");
+
+    return moods[3];
   }
 
   public void showWritingPanel(JPanel panel) {

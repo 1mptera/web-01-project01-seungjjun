@@ -11,28 +11,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DailySentence {
+public class DailySentence extends JFrame{
   private List<Post> posts;
 
   private JFrame frame;
 
   private JPanel contentPanel;
   private MainPanel mainPanel;
+  private String mood;
 
-  public static void main(String[] args) throws FileNotFoundException {
-    DailySentence application = new DailySentence();
-    application.run();
-  }
+  DailySentence(String mood) throws FileNotFoundException {
+    this.mood = mood;
 
-  public DailySentence() throws FileNotFoundException {
     posts = new ArrayList<>();
 
     PostLoader postLoader = new PostLoader();
 
     posts = postLoader.loadPosts();
-  }
 
-  public void run() {
     initFrame();
     initMenuButtons();
     initContentPanel();

@@ -14,6 +14,12 @@ public class Post {
     this.state = Post.EXISTENCE;
   }
 
+  public Post(String title, String content, String state) {
+    this.title = title;
+    this.content = content;
+    this.state = state;
+  }
+
   public String state() {
     return state;
   }
@@ -36,5 +42,9 @@ public class Post {
 
   public void modifyContent(String content) {
     this.content = content;
+  }
+
+  public String toCsvRow() {
+    return title + "," + content + "," + state;
   }
 }

@@ -4,6 +4,10 @@ import utils.WritingPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +19,25 @@ public class DailySentence {
   private JPanel contentPanel;
   private MainPanel mainPanel;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException {
     DailySentence application = new DailySentence();
     application.run();
   }
 
-  public DailySentence() {
+  public DailySentence() throws FileNotFoundException {
     posts = new ArrayList<>();
+
+    PostLoader postLoader = new PostLoader();
+
+    posts = postLoader.loadPosts();
   }
 
   public void run() {
     initFrame();
     initMenuButtons();
     initContentPanel();
+
+    postWriter();
 
     frame.setVisible(true);
   }
@@ -72,17 +82,31 @@ public class DailySentence {
     return writingButton;
   }
 
-  private void showWritingPanel(JPanel panel) {
+  public void showWritingPanel(JPanel panel) {
     frame.add(panel);
     panel.setVisible(true);
     frame.setVisible(true);
   }
 
-  private void showContentPanel(JPanel panel) {
+  public void showContentPanel(JPanel panel) {
     contentPanel.removeAll();
     contentPanel.add(panel);
     contentPanel.setVisible(false);
     contentPanel.setVisible(true);
     frame.setVisible(true);
+  }
+
+  public void postWriter() {
+    frame.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent event) {
+        PostLoader postLoader = new PostLoader();
+        try {
+          postLoader.writePost(posts);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    });
   }
 }

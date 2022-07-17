@@ -26,7 +26,6 @@ public class MainPanel extends JPanel {
         sentenceLabel.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
             JFrame writingDetailFrame = new WritingDetailFrame(posts, writing);
-
           }
         });
 

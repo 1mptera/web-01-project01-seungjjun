@@ -57,4 +57,9 @@ public class Post {
   public String toCsvRow() {
     return title + "," + content + "," + state + "," + mood;
   }
+
+  @Override
+  public String toString() {
+    return title + "," + content + "," + state + "," + mood;
+  }
 }

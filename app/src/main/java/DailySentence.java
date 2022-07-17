@@ -1,6 +1,6 @@
-import models.Writing;
+import models.Post;
 import utils.MainPanel;
-import utils.WritingFrame;
+import utils.WritingPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailySentence {
-  private List<Writing> writings;
+  private List<Post> posts;
 
   private JFrame frame;
 
@@ -21,7 +21,7 @@ public class DailySentence {
   }
 
   public DailySentence() {
-    writings = new ArrayList<>();
+    posts = new ArrayList<>();
   }
 
   public void run() {
@@ -54,7 +54,7 @@ public class DailySentence {
   public JButton createMainButton() {
     JButton mainButton = new JButton("메인 페이지");
     mainButton.addActionListener(event -> {
-      mainPanel = new MainPanel(writings);
+      mainPanel = new MainPanel(posts);
       showContentPanel(mainPanel);
     });
 
@@ -64,9 +64,9 @@ public class DailySentence {
   private JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JPanel writingFrame = new WritingFrame(writings, mainPanel, contentPanel);
+      JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel);
 
-      showWritingPanel(writingFrame);
+      showWritingPanel(writingPanel);
     });
 
     return writingButton;

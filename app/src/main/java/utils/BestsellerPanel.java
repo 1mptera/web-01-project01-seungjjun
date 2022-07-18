@@ -13,14 +13,19 @@ public class BestsellerPanel extends JPanel {
   public BestsellerPanel(List<Book> books) {
     this.books = books;
 
-    this.setLayout(new GridLayout(0, 1));
+    this.setLayout(new GridLayout(0, 2));
     bestsellerLabel();
   }
 
   public void bestsellerLabel() {
     for(Book book : books) {
       bestsellerLabel = new JLabel(book.title());
+      JButton starRating = new JButton("평점 주기");
+      starRating.addActionListener(event -> {
+        JFrame starRatingFrame = new StarRatingFrame();
+      });
       this.add(bestsellerLabel);
+      this.add(starRating);
     }
   }
 }

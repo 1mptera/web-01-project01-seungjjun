@@ -23,7 +23,7 @@ public class WritingDetailFrame extends JFrame {
     this.contentPanel = contentPanel;
 
     detailFrame = new JFrame();
-    detailFrame.setSize(800, 800);
+    detailFrame.setSize(1000, 1000);
     detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     loadContent();
@@ -44,10 +44,14 @@ public class WritingDetailFrame extends JFrame {
   }
 
   private JLabel createContent() {
+    JLabel label = new JLabel("글귀에 대한 정보(출처)입니다. 어디서 읽었는지 누가 말 했는지 등등");
+    label.setBounds(10,20, 800,20);
+    detailPanel.add(label);
+
     String content = post.content();
-    JLabel label = new JLabel(content);
-    label.setBounds(10, 20, 800, 100);
-    return label;
+    JLabel contentLabel = new JLabel("출처 : " + content);
+    contentLabel.setBounds(10, 20, 800, 100);
+    return contentLabel;
   }
 
   private JLabel createMood() {

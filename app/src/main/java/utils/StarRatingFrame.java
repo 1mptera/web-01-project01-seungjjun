@@ -1,14 +1,23 @@
 package utils;
 
+import models.Book;
+
 import javax.swing.*;
-import java.awt.*;
+import java.util.List;
 
 public class StarRatingFrame extends JFrame {
   private final JFrame starRatingFrame;
   private JPanel starRatingPanel;
   private String[] star = {"⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"};
+  private Book book;
+  private List<Book> books;
 
-  StarRatingFrame() {
+  private JComboBox starRatingComboBox;
+
+  StarRatingFrame(Book book, List<Book> books) {
+    this.book = book;
+    this.books = books;
+
     starRatingFrame = new JFrame("별점주기");
 
     starRatingFrame.setSize(200,200);
@@ -37,7 +46,7 @@ public class StarRatingFrame extends JFrame {
   }
 
   public JComboBox createComboBox() {
-    JComboBox starRatingComboBox = new JComboBox(star);
+    starRatingComboBox = new JComboBox(star);
     starRatingComboBox.setBounds(50,30,130,40);
     return starRatingComboBox;
   }
@@ -45,7 +54,12 @@ public class StarRatingFrame extends JFrame {
   private JButton createButton() {
     JButton starRatingButton = new JButton("등록하기");
     starRatingButton.addActionListener(event -> {
+      book.conversionStar(String.valueOf(starRatingComboBox.getSelectedItem()));
+      String star = String.valueOf(Double.parseDouble(book.starRating()) + book.star());
 
+      book.modifyStarRating(star);
+
+      starRatingFrame.setVisible(false);
     });
     starRatingButton.setBounds(50,70,100,30);
     return starRatingButton;

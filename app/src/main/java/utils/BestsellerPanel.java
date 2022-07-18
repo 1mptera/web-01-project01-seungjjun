@@ -22,7 +22,7 @@ public class BestsellerPanel extends JPanel {
       bestsellerLabel = new JLabel(book.title());
       JButton starRating = new JButton("평점 주기");
       starRating.addActionListener(event -> {
-        JFrame starRatingFrame = new StarRatingFrame();
+        JFrame starRatingFrame = new StarRatingFrame(book, books);
       });
       this.add(bestsellerLabel);
       this.add(starRating);

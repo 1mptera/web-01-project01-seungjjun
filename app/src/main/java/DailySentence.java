@@ -48,7 +48,7 @@ public class DailySentence extends JFrame{
 
   public void initFrame() {
     frame = new JFrame("Daily Sentence");
-    frame.setSize(800, 800);
+    frame.setSize(1000, 1000);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
   }
 
@@ -133,6 +133,7 @@ public class DailySentence extends JFrame{
   }
 
   public void showPanel(JPanel panel) {
+    contentPanel.removeAll();
     frame.add(panel);
     panel.setVisible(true);
     frame.setVisible(true);

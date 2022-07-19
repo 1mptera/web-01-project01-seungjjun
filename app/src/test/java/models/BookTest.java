@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BookTest {
   @Test
-  void creation(){
+  void creation() {
     Book book = new Book("아몬드",
         "공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”");
 
@@ -21,9 +21,16 @@ class BookTest {
         "아몬드",
         "공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”",
         "EXISTENCE",
-        "4.7");
+        "4.7",
+        "0",
+        "0.0");
 
-    assertEquals("아몬드`공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”`EXISTENCE`4.7",
+    assertEquals("아몬드`" +
+            "공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”`" +
+            "EXISTENCE`" +
+            "4.7`" +
+            "0`" +
+            "0.0",
         book.toCsvRow());
   }
 
@@ -32,21 +39,22 @@ class BookTest {
     Book book = new Book("아몬드",
         "공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”",
         "EXISTENCE",
-        "4.7");
+        "4.7",
+        "0",
+        "0.0");
 
     book.conversionStar("⭐");
-    assertEquals(1,book.star());
-
-    book.conversionStar("⭐⭐");
-    assertEquals(3,book.star());
+    assertEquals(1, book.star());
   }
 
   @Test
   void modifyStarRating() {
-    Book book = new Book("아몬드",
+    Book book = new Book("4.7",
+        "아몬드",
         "공감 불능 사회, 차가움을 녹이는 아몬드 “고통과 공감의 능력을 깨우치게 할 강력한 소설”",
         "EXISTENCE",
-        "4.7");
+        "0",
+        "0.0");
 
     assertEquals("4.7", book.starRating());
 
@@ -57,6 +65,15 @@ class BookTest {
 
     book.conversionStar("⭐⭐⭐");
     book.modifyStarRating(String.valueOf(book.star()));
-    assertEquals("5.0", book.starRating());
+    assertEquals("3.0", book.starRating());
+  }
+
+  @Test
+  void accumulator() {
+    Book book = new Book("아몬드","아몬드 내용");
+
+    book.accumulator("4.0");
+
+    assertEquals("4.0", book.getAccumulator());
   }
 }

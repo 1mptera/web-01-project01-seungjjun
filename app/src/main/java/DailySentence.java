@@ -1,5 +1,6 @@
 import models.Book;
 import models.Post;
+import org.checkerframework.checker.units.qual.A;
 import utils.BestsellerPanel;
 import utils.MainPanel;
 import utils.WritingPanel;
@@ -30,6 +31,8 @@ class TotalPanel extends JPanel{
 }
 
 public class DailySentence extends JFrame{
+  private Book book;
+
   private List<Post> posts;
   private List<Book> books;
 
@@ -43,6 +46,8 @@ public class DailySentence extends JFrame{
   private JLabel sentenceLabel;
 
   DailySentence(String mood) throws FileNotFoundException {
+    book = new Book();
+
     this.mood = mood;
 
     posts = new ArrayList<>();
@@ -125,7 +130,7 @@ public class DailySentence extends JFrame{
   public JButton createBestsellerButton() {
     JButton bestsellerButton = new JButton("베스트셀러");
     bestsellerButton.addActionListener(event -> {
-      JPanel bestsellerPanel = new BestsellerPanel(books);
+      JPanel bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
 
       showContentPanel(bestsellerPanel);
     });

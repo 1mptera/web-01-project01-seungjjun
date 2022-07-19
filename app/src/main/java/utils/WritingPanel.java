@@ -14,16 +14,22 @@ public class WritingPanel extends JPanel {
 
   private JPanel mainPanel;
   private JPanel contentPanel;
+  private JPanel menuPanel;
+  private JPanel totalPanel;
 
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
 
   public WritingPanel(List<Post> posts,
                       JPanel mainPanel,
-                      JPanel contentPanel) {
+                      JPanel contentPanel,
+                      JPanel menuPanel,
+                      JPanel totalPanel) {
 
     this.posts = posts;
     this.mainPanel = mainPanel;
     this.contentPanel = contentPanel;
+    this.menuPanel = menuPanel;
+    this.totalPanel = totalPanel;
 
     write();
   }
@@ -32,11 +38,11 @@ public class WritingPanel extends JPanel {
     this.setLayout(null);
 
     JTextField titleBox = new JTextField(20);
-    titleBox.setBounds(50, 10, 600, 40);
+    titleBox.setBounds(50, 10, 800, 40);
     this.add(titleBox);
 
     JComboBox moodComboBox = new JComboBox(mood);
-    moodComboBox.setBounds(650, 10, 100, 40);
+    moodComboBox.setBounds(850, 10, 100, 40);
     this.add(moodComboBox);
 
     JTextArea contentBox = new JTextArea();
@@ -47,7 +53,7 @@ public class WritingPanel extends JPanel {
       }
     });
     contentBox.setLineWrap(true);
-    contentBox.setBounds(50, 60, 700, 600);
+    contentBox.setBounds(50, 60, 900, 700);
     this.add(contentBox);
 
     JButton writingButton = new JButton("글귀 작성하기");
@@ -62,11 +68,10 @@ public class WritingPanel extends JPanel {
       refreshPanel();
 
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
-
       showContentPanel(mainPanel);
     });
 
-    writingButton.setBounds(650, 680, 100, 40);
+    writingButton.setBounds(850, 800, 100, 40);
     this.add(writingButton);
   }
 
@@ -77,9 +82,11 @@ public class WritingPanel extends JPanel {
   }
 
   private void showContentPanel(JPanel panel) {
+    mainPanel.setOpaque(false);
     contentPanel.removeAll();
     contentPanel.add(panel);
     contentPanel.setVisible(false);
     contentPanel.setVisible(true);
   }
 }
+

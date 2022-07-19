@@ -14,6 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+class TotalPanel extends JPanel{
+  private Image img;
+
+  public TotalPanel(Image img) {
+    this.img = img;
+    setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+    setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+    setLayout(null);
+  }
+
+  public void paintComponent(Graphics g) {
+    g.drawImage(img, 0, 0 ,null);
+  }
+}
+
 public class DailySentence extends JFrame{
   private List<Post> posts;
   private List<Book> books;
@@ -23,6 +38,9 @@ public class DailySentence extends JFrame{
   private JPanel contentPanel;
   private MainPanel mainPanel;
   private String mood;
+  private JPanel totalPanel;
+  private JPanel menuPanel;
+  private JLabel sentenceLabel;
 
   DailySentence(String mood) throws FileNotFoundException {
     this.mood = mood;
@@ -37,8 +55,7 @@ public class DailySentence extends JFrame{
     books = bookLoader.loadBooks();
 
     initFrame();
-    initMenuButtons();
-    initContentPanel(mood);
+    initTotalPanel();
 
     postWriter();
     bookWriter();
@@ -52,17 +69,31 @@ public class DailySentence extends JFrame{
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
   }
 
+  private void initTotalPanel() {
+    totalPanel = new TotalPanel(new ImageIcon(
+        "./app/src/main/img/MainFrameBackground.jpeg").getImage());
+
+    frame.add(totalPanel);
+
+    initMenuButtons();
+    initContentPanel(mood);
+  }
+
   public void initContentPanel(String mood) {
     contentPanel = new JPanel();
+    contentPanel.setBounds(0,100,1000,900);
+    contentPanel.setOpaque(false);
 
     randomSentence(mood);
 
-    frame.add(contentPanel);
+    totalPanel.add(contentPanel);
   }
 
   public void initMenuButtons() {
-    JPanel menuPanel = new JPanel();
-    frame.add(menuPanel, BorderLayout.PAGE_START);
+    menuPanel = new JPanel();
+    menuPanel.setBounds(230,10,500,500);
+    menuPanel.setOpaque(false);
+    totalPanel.add(menuPanel);
 
     menuPanel.add(createMainButton());
     menuPanel.add(createWritingButton());
@@ -73,6 +104,7 @@ public class DailySentence extends JFrame{
     JButton mainButton = new JButton("글 목록 보기");
     mainButton.addActionListener(event -> {
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
+
       showContentPanel(mainPanel);
     });
 
@@ -82,7 +114,7 @@ public class DailySentence extends JFrame{
   public JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel);
+      JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel, menuPanel, totalPanel);
 
       showPanel(writingPanel);
     });
@@ -111,10 +143,14 @@ public class DailySentence extends JFrame{
       String sentence = parsePostSentence(randomPost);
 
       if(postMood.equals(mood)) {
-        JLabel sentenceLabel = new JLabel(sentence);
-        sentenceLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        sentenceLabel = new JLabel("<html><body style='text-align:center;'>"
+            + sentence
+            + "</body></html>");
 
-        contentPanel.add(sentenceLabel);
+        sentenceLabel.setBounds(260,300,1000,100);
+        sentenceLabel.setFont(new Font("Serif", Font.BOLD, 17));
+
+        totalPanel.add(sentenceLabel);
         isClickedMoodEqualsRandomMood = false;
       }
     }
@@ -133,6 +169,7 @@ public class DailySentence extends JFrame{
   }
 
   public void showPanel(JPanel panel) {
+    menuPanel.removeAll();
     contentPanel.removeAll();
     frame.add(panel);
     panel.setVisible(true);
@@ -140,6 +177,8 @@ public class DailySentence extends JFrame{
   }
 
   public void showContentPanel(JPanel panel) {
+    totalPanel.remove(sentenceLabel);
+    mainPanel.setOpaque(false);
     contentPanel.removeAll();
     contentPanel.add(panel);
     contentPanel.setVisible(false);

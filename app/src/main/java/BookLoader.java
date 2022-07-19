@@ -41,6 +41,8 @@ public class BookLoader {
         bookInformation[0],
         bookInformation[1],
         bookInformation[2],
-        bookInformation[3]);
+        bookInformation[3],
+        bookInformation[4],
+        bookInformation[5]);
   }
 }

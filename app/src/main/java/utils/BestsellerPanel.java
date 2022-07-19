@@ -14,6 +14,7 @@ public class BestsellerPanel extends JPanel {
     this.books = books;
 
     this.setLayout(new GridLayout(0, 2));
+    this.setOpaque(false);
     bestsellerLabel();
   }
 

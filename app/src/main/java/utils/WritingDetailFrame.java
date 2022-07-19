@@ -3,6 +3,7 @@ package utils;
 import models.Post;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class WritingDetailFrame extends JFrame {
@@ -38,50 +39,60 @@ public class WritingDetailFrame extends JFrame {
     detailPanel.add(createContent());
     detailPanel.add(createMood());
     detailPanel.add(createDeleteButton());
-    detailPanel.add(cteateModifyButton());
+    detailPanel.add(createModifyButton());
+    detailPanel.add(createGoBackButton());
 
     detailFrame.add(detailPanel);
   }
 
   private JLabel createContent() {
-    JLabel label = new JLabel("글귀에 대한 정보(출처)입니다. 어디서 읽었는지 누가 말 했는지 등등");
-    label.setBounds(10,20, 800,20);
-    detailPanel.add(label);
+    JLabel informationLabel = new JLabel("글귀에 대한 정보(출처)에 대한 상세 페이지 입니다." +
+        " 어디서 읽었는지, 누가 말 했는지 등등");
+    informationLabel.setFont(new Font("Serif", Font.BOLD, 17));
+    informationLabel.setBounds(10,20, 800,20);
+    detailPanel.add(informationLabel);
+
+    JLabel titleLabel = new JLabel("제목: " + post.title());
+    titleLabel.setFont(new Font("Serif", Font.BOLD, 15));
+    titleLabel.setBounds(10,70,800,20);
+    detailPanel.add(titleLabel);
 
     String content = post.content();
     JLabel contentLabel = new JLabel("출처 : " + content);
-    contentLabel.setBounds(10, 20, 800, 100);
+    contentLabel.setFont(new Font("Serif", Font.BOLD, 17));
+    contentLabel.setBounds(10, 120, 1000, 20);
     return contentLabel;
   }
 
   private JLabel createMood() {
     String mood = post.mood();
     JLabel moodLabel = new JLabel("카테고리: " + mood);
-    moodLabel.setBounds(680,0,100,30);
+    moodLabel.setFont(new Font("Serif", Font.BOLD, 15));
+    moodLabel.setBounds(880,20,100,30);
     return moodLabel;
   }
 
-  private JButton cteateModifyButton() {
+  private JButton createModifyButton() {
     JButton modifyButton = new JButton("수정하기");
-    modifyButton.setBounds(530, 700, 100, 40);
+    modifyButton.setBounds(730, 800, 100, 40);
     modifyButton.addActionListener(event -> {
       detailPanel.removeAll();
 
       JButton internalModifiyButton = new JButton("수정하기");
-      internalModifiyButton.setBounds(650, 700, 100, 40);
+      internalModifiyButton.setBounds(850, 800, 100, 40);
       detailPanel.add(internalModifiyButton);
 
       JTextField titleBox = new JTextField(20);
-      titleBox.setBounds(50, 10, 600, 40);
+      titleBox.setBounds(50, 10, 800, 40);
       titleBox.setText(post.title());
       detailPanel.add(titleBox);
 
       JComboBox moodComboBox = new JComboBox(mood);
-      moodComboBox.setBounds(650, 10, 100, 40);
+      moodComboBox.setBounds(850, 10, 100, 40);
       detailPanel.add(moodComboBox);
 
       JTextArea contentBox = new JTextArea();
-      contentBox.setBounds(50, 60, 700, 600);
+      contentBox.setBounds(50, 60, 900, 700);
       contentBox.setText(post.content());
       detailPanel.add(contentBox);
 
@@ -104,18 +115,29 @@ public class WritingDetailFrame extends JFrame {
 
   private JButton createDeleteButton() {
     JButton deleteButton = new JButton("삭제하기");
-    deleteButton.setBounds(650, 700, 100, 40);
+    deleteButton.setBounds(850, 800, 100, 40);
     deleteButton.addActionListener(event -> {
       post.deletion();
       detailFrame.setVisible(false);
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
       showContentPanel(mainPanel);
-
     });
     return deleteButton;
   }
 
+  private JButton createGoBackButton() {
+    JButton goBackButton = new JButton("뒤로가기");
+    goBackButton.setBounds(20,800,100,40);
+    goBackButton.addActionListener(event -> {
+      detailFrame.setVisible(false);
+      mainPanel = new MainPanel(posts, mainPanel, contentPanel);
+      showContentPanel(mainPanel);
+    });
+    return goBackButton;
+  }
+
   private void showContentPanel(JPanel mainPanel) {
+    mainPanel.setOpaque(false);
     contentPanel.removeAll();
     contentPanel.add(mainPanel);
     contentPanel.setVisible(false);

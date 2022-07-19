@@ -4,13 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
+class MoodButtonsPanel extends JPanel{
+  private Image img;
+
+  public MoodButtonsPanel(Image img) {
+    this.img = img;
+    setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+    setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+    setLayout(null);
+  }
+
+  public void paintComponent(Graphics g) {
+    g.drawImage(img, 0, 0 ,null);
+  }
+}
+
 public class MoodButtonFrame {
   private JFrame buttonFrame;
 
   private JPanel moodButtonsPanel;
 
   private JButton lifeButton;
-  private JButton motivationBtuoon;
+  private JButton motivationButton;
   private JButton partingButton;
   private JButton hopeButton;
 
@@ -32,8 +47,8 @@ public class MoodButtonFrame {
       showDailySentenceFrame(lifeButton);
     });
 
-    motivationBtuoon.addActionListener(event -> {
-      showDailySentenceFrame(motivationBtuoon);
+    motivationButton.addActionListener(event -> {
+      showDailySentenceFrame(motivationButton);
     });
 
     partingButton.addActionListener(event -> {
@@ -57,13 +72,13 @@ public class MoodButtonFrame {
 
   public void initFrame() {
     buttonFrame = new JFrame("기분에 맞는 버튼을 선택하세요");
-    buttonFrame.setSize(400,300);
-    buttonFrame.setLayout(new FlowLayout());
+    buttonFrame.setSize(500,500);
     buttonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   public void setButtonsLayout() {
-    moodButtonsPanel = new JPanel();
+    moodButtonsPanel = new MoodButtonsPanel(new ImageIcon("./app/src/main/img/background.jpeg").getImage());
+
     buttonFrame.add(moodButtonsPanel);
 
     createLifeButton();
@@ -74,21 +89,25 @@ public class MoodButtonFrame {
 
   private void createLifeButton() {
     lifeButton = new JButton("인생");
+    lifeButton.setBounds(160,20,80,50);
     moodButtonsPanel.add(lifeButton);
   }
 
   private void createMotivationButton() {
-    motivationBtuoon = new JButton("동기부여");
-    moodButtonsPanel.add(motivationBtuoon);
+    motivationButton = new JButton("동기부여");
+    motivationButton.setBounds(290,20,80,50);
+    moodButtonsPanel.add(motivationButton);
   }
 
   private void createPartingButton() {
     partingButton = new JButton("이별");
+    partingButton.setBounds(160, 110, 80, 50);
     moodButtonsPanel.add(partingButton);
   }
 
   private void createHopeButton() {
     hopeButton = new JButton("희망");
+    hopeButton.setBounds(290,110,80,50);
     moodButtonsPanel.add(hopeButton);
   }
 }

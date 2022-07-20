@@ -1,3 +1,4 @@
+import frames.StorageFrame;
 import models.Book;
 import models.Post;
 import panels.BookRankingPanel;
@@ -105,6 +106,7 @@ public class DailySentence extends JFrame{
     menuPanel.add(createMainButton());
     menuPanel.add(createWritingButton());
     menuPanel.add(createBestsellerButton());
+    menuPanel.add(createStorageButton());
   }
 
   public JButton createMainButton() {
@@ -122,7 +124,6 @@ public class DailySentence extends JFrame{
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
       JFrame writingFrame = new WritingFrame(posts, mainPanel, contentPanel, menuPanel);
-
     });
 
     return writingButton;
@@ -136,6 +137,14 @@ public class DailySentence extends JFrame{
       showBookRankingPanel(bookRankingPanel);
     });
     return bestsellerButton;
+  }
+
+  private JButton createStorageButton() {
+    JButton storageButton = new JButton("글귀 보관함");
+    storageButton.addActionListener(event -> {
+      JFrame storageFrame = new StorageFrame();
+    });
+    return storageButton;
   }
 
   public void randomSentence(String mood) {

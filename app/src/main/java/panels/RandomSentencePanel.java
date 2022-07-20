@@ -2,6 +2,7 @@ package panels;
 
 import models.Post;
 import models.Storage;
+import utils.SentenceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomSentencePanel {
+  SentenceLoader sentenceLoader = new SentenceLoader();
+
   private List<Post> posts;
 
   private List<Storage> storages;
@@ -49,21 +52,13 @@ public class RandomSentencePanel {
         saveButton = new JButton("저장하기");
         saveButton.setBounds(880,800,80,30);
 
-        saveSentence(sentence);
+        sentenceLoader.saveSentence(storages, sentence, saveButton, totalPanel);
 
         totalPanel.add(saveButton);
 
         isClickedMoodEqualsRandomMood = false;
       }
     }
-  }
-
-  private void saveSentence(String sentence) {
-    saveButton.addActionListener(event -> {
-      String savingSentence = sentence;
-      storages.add(new Storage(savingSentence));
-
-    });
   }
 
   public String parsePostSentence(String randomPost) {

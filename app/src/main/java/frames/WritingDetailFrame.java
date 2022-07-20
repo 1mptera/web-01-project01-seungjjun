@@ -1,7 +1,7 @@
 package frames;
 
 import models.Post;
-import utils.MainPanel;
+import panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,7 @@
 package frames;
 
 import models.Book;
-import utils.BestsellerPanel;
+import panels.BookRankingPanel;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 
-public class WriteBookRecommendFrame extends JFrame {
+public class WritingBookRecommendFrame extends JFrame {
   private Book book;
   private List<Book> books;
 
@@ -19,15 +19,15 @@ public class WriteBookRecommendFrame extends JFrame {
   private JTextArea contentBox;
 
   private JPanel writePanel;
-  private JPanel bestsellerPanel;
+  private JPanel bookRankingPanel;
   private JPanel contentPanel;
 
-  public WriteBookRecommendFrame(Book book, List<Book> books,
-                                 JPanel bestsellerPanel,
-                                 JPanel contentPanel) {
+  public WritingBookRecommendFrame(Book book, List<Book> books,
+                                   JPanel bookRankingPanel,
+                                   JPanel contentPanel) {
     this.book = book;
     this.books = books;
-    this.bestsellerPanel = bestsellerPanel;
+    this.bookRankingPanel = bookRankingPanel;
     this.contentPanel = contentPanel;
 
     writeFrame = new JFrame();
@@ -87,15 +87,15 @@ public class WriteBookRecommendFrame extends JFrame {
 
       writeFrame.setVisible(false);
 
-      bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
-      showContentPanel(bestsellerPanel);
+      bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
+      showBookRankingPanel(bookRankingPanel);
     });
 
     writingButton.setBounds(850, 800, 100, 40);
     return writingButton;
   }
 
-  private void showContentPanel(JPanel panel) {
+  private void showBookRankingPanel(JPanel panel) {
     panel.setOpaque(false);
     contentPanel.removeAll();
     contentPanel.add(panel);

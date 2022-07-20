@@ -1,8 +1,10 @@
 import models.Book;
 import models.Post;
-import utils.BestsellerPanel;
-import utils.MainPanel;
-import utils.WritingPanel;
+import panels.BookRankingPanel;
+import panels.MainPanel;
+import frames.WritingFrame;
+import utils.BookLoader;
+import utils.PostLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,9 +121,8 @@ public class DailySentence extends JFrame{
   public JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JPanel writingPanel = new WritingPanel(posts, mainPanel, contentPanel, menuPanel, totalPanel);
+      JFrame writingFrame = new WritingFrame(posts, mainPanel, contentPanel, menuPanel);
 
-      showPanel(writingPanel);
     });
 
     return writingButton;
@@ -130,9 +131,9 @@ public class DailySentence extends JFrame{
   public JButton createBestsellerButton() {
     JButton bestsellerButton = new JButton("책 추천 순위");
     bestsellerButton.addActionListener(event -> {
-      JPanel bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
+      JPanel bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
 
-      showContentPanel(bestsellerPanel);
+      showBookRankingPanel(bookRankingPanel);
     });
     return bestsellerButton;
   }
@@ -174,11 +175,12 @@ public class DailySentence extends JFrame{
     return moods[3];
   }
 
-  public void showPanel(JPanel panel) {
-    menuPanel.removeAll();
+  public void showBookRankingPanel(JPanel panel) {
+    totalPanel.remove(sentenceLabel);
     contentPanel.removeAll();
-    frame.add(panel);
-    panel.setVisible(true);
+    contentPanel.add(panel);
+    contentPanel.setVisible(false);
+    contentPanel.setVisible(true);
     frame.setVisible(true);
   }
 

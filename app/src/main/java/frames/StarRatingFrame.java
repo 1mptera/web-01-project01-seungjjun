@@ -1,33 +1,35 @@
 package frames;
 
 import models.Book;
-import utils.BestsellerPanel;
+import panels.BookRankingPanel;
+import utils.StarRatingCalculator;
 
 import javax.swing.*;
 import java.util.List;
 
 public class StarRatingFrame extends JFrame {
-  private final JFrame starRatingFrame;
-  private JPanel starRatingPanel;
-  private String[] star = {"⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"};
-  private Book book;
-  private List<Book> books;
+  private StarRatingCalculator starRatingCalculator;
 
-  private BestsellerPanel bestsellerPanel;
+  private String[] star = {"⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"};
+  private List<Book> books;
+  private Book book;
+
+  private final JFrame starRatingFrame;
+
+  private BookRankingPanel bookRankingPanel;
+  private JPanel starRatingPanel;
   private JPanel contentPanel;
 
   private JComboBox starRatingComboBox;
 
-  private String totalStar;
-  private String starRating;
-
   public StarRatingFrame(Book book, List<Book> books, JPanel contentPanel) {
+    starRatingCalculator = new StarRatingCalculator();
+
     this.book = book;
     this.books = books;
     this.contentPanel = contentPanel;
 
     starRatingFrame = new JFrame("별점주기");
-
     starRatingFrame.setSize(200,200);
     starRatingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -62,31 +64,15 @@ public class StarRatingFrame extends JFrame {
   private JButton createButton() {
     JButton starRatingButton = new JButton("등록하기");
     starRatingButton.addActionListener(event -> {
-      calculatorStarRating();
-
-      book.accumulator(totalStar);
-      book.modifyStarRating(starRating);
+      starRatingCalculator.calculateStarRating(book, starRatingComboBox);
 
       starRatingFrame.setVisible(false);
 
-      bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
-      showContentPanel(bestsellerPanel);
+      bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
+      showContentPanel(bookRankingPanel);
     });
     starRatingButton.setBounds(50,70,100,30);
     return starRatingButton;
-  }
-
-  public void calculatorStarRating() {
-    String count = String.valueOf(Integer.parseInt(book.clickedNumber()) + 1);
-    book.plusClickedNumber(count);
-
-    book.conversionStar(String.valueOf(starRatingComboBox.getSelectedItem()));
-
-    totalStar = String.valueOf(
-        Double.parseDouble(book.getAccumulator()) + book.star());
-
-    starRating = String.valueOf(
-        Double.parseDouble(totalStar) / Double.parseDouble(count));
   }
 
   private void showContentPanel(JPanel panel) {

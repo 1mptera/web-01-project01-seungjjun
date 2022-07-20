@@ -1,7 +1,7 @@
 package frames;
 
 import models.Book;
-import utils.BestsellerPanel;
+import panels.BookRankingPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.List;
 public class BookDetailFrame extends JFrame {
   private JFrame bookDetailFrame;
 
-  private BestsellerPanel bestsellerPanel;
+  private BookRankingPanel bookRankingPanel;
   private JPanel bookDetailPanel;
   private JPanel contentPanel;
 
@@ -48,7 +48,7 @@ public class BookDetailFrame extends JFrame {
     bookDetailPanel.add(titleLabel);
 
     JLabel contentLabel = new JLabel();
-    contentLabel.setText("<html>정보 : "
+    contentLabel.setText("<html>인상 깊은 문장 : "
         + book.summary().replaceAll("newLine", "<br/>") + "</html>");
     contentLabel.setFont(new Font("Serif", Font.BOLD, 17));
     contentLabel.setBounds(10, 50, 1000, 700);
@@ -61,8 +61,8 @@ public class BookDetailFrame extends JFrame {
     deleteButton.addActionListener(event -> {
       book.deletion();
       bookDetailFrame.setVisible(false);
-      bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
-      showContentPanel(bestsellerPanel);
+      bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
+      showContentPanel(bookRankingPanel);
     });
     return deleteButton;
   }
@@ -72,13 +72,13 @@ public class BookDetailFrame extends JFrame {
     goBackButton.setBounds(20,800,100,40);
     goBackButton.addActionListener(event -> {
       bookDetailFrame.setVisible(false);
-      bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
-      showContentPanel(bestsellerPanel);
+      bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
+      showContentPanel(bookRankingPanel);
     });
     return goBackButton;
   }
 
-  private void showContentPanel(BestsellerPanel panel) {
+  private void showContentPanel(BookRankingPanel panel) {
     contentPanel.removeAll();
     contentPanel.add(panel);
     contentPanel.setVisible(false);

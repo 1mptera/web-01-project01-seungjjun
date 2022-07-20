@@ -1,12 +1,15 @@
 import frames.StorageFrame;
 import models.Book;
 import models.Post;
+import models.Storage;
+import org.checkerframework.checker.units.qual.A;
 import panels.BookRankingPanel;
 import panels.MainPanel;
 import frames.WritingFrame;
 import panels.RandomSentencePanel;
 import utils.BookLoader;
 import utils.PostLoader;
+import utils.StorageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +41,7 @@ public class DailySentence extends JFrame{
 
   private List<Post> posts;
   private List<Book> books;
+  private List<Storage> storages;
 
   private JFrame frame;
 
@@ -57,6 +61,7 @@ public class DailySentence extends JFrame{
 
     posts = new ArrayList<>();
     books = new ArrayList<>();
+    storages = new ArrayList<>();
 
     PostLoader postLoader = new PostLoader();
     posts = postLoader.loadPosts();
@@ -64,11 +69,15 @@ public class DailySentence extends JFrame{
     BookLoader bookLoader = new BookLoader();
     books = bookLoader.loadBooks();
 
+    StorageLoader storageLoader = new StorageLoader();
+    storages = storageLoader.loadStorage();
+
     initFrame();
     initTotalPanel();
 
     postWriter();
     bookWriter();
+    storageWriter();
 
     frame.setVisible(true);
   }
@@ -94,7 +103,7 @@ public class DailySentence extends JFrame{
     contentPanel.setBounds(0,100,1000,900);
     contentPanel.setOpaque(false);
 
-    randomSentencePanel.randomSentence(posts, mood, totalPanel);
+    randomSentencePanel.randomSentence(posts, storages, mood, totalPanel);
 
     totalPanel.add(contentPanel);
   }
@@ -144,7 +153,7 @@ public class DailySentence extends JFrame{
   private JButton createStorageButton() {
     JButton storageButton = new JButton("글귀 보관함");
     storageButton.addActionListener(event -> {
-      JFrame storageFrame = new StorageFrame();
+      JFrame storageFrame = new StorageFrame(storages);
     });
     return storageButton;
   }
@@ -185,6 +194,20 @@ public class DailySentence extends JFrame{
         BookLoader bookLoader = new BookLoader();
         try {
           bookLoader.writeBook(books);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    });
+  }
+
+  private void storageWriter() {
+    frame.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent event) {
+        StorageLoader storageLoader = new StorageLoader();
+        try {
+          storageLoader.writeStorage(storages);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }

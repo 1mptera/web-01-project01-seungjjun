@@ -78,7 +78,6 @@ public class WritingFrame extends JFrame {
       posts.add(new Post(sentence, content, state, selectedMood));
 
       writeFrame.setVisible(false);
-//      refreshPanel();
 
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
       showContentPanel(mainPanel);
@@ -89,12 +88,6 @@ public class WritingFrame extends JFrame {
 
     writeFrame.add(writePanel);
   }
-
-//  private void refreshPanel() {
-//    this.removeAll();
-//    this.setVisible(false);
-//    this.setVisible(true);
-//  }
 
   private void showContentPanel(JPanel panel) {
     mainPanel.setOpaque(false);

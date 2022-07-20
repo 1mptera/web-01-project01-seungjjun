@@ -1,49 +1,61 @@
-package utils;
+package frames;
 
 import models.Post;
+import panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class WritingPanel extends JPanel {
+public class WritingFrame extends JFrame {
   private Post post;
 
   private List<Post> posts;
 
+  private JFrame writeFrame;
+
+  private JPanel writePanel;
   private JPanel mainPanel;
   private JPanel contentPanel;
   private JPanel menuPanel;
-  private JPanel totalPanel;
 
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
 
-  public WritingPanel(List<Post> posts,
+  public WritingFrame(List<Post> posts,
                       JPanel mainPanel,
                       JPanel contentPanel,
-                      JPanel menuPanel,
-                      JPanel totalPanel) {
+                      JPanel menuPanel) {
 
     this.posts = posts;
     this.mainPanel = mainPanel;
     this.contentPanel = contentPanel;
     this.menuPanel = menuPanel;
-    this.totalPanel = totalPanel;
+
+    initFrame();
 
     write();
+
+    writeFrame.setVisible(true);
+  }
+
+  private void initFrame() {
+    writeFrame = new JFrame();
+    writeFrame.setSize(1000, 1000);
+    writeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
   }
 
   public void write() {
-    this.setLayout(null);
+    writePanel = new JPanel();
+    writePanel.setLayout(null);
 
     JTextField titleBox = new JTextField(20);
     titleBox.setBounds(50, 10, 800, 40);
-    this.add(titleBox);
+    writePanel.add(titleBox);
 
     JComboBox moodComboBox = new JComboBox(mood);
     moodComboBox.setBounds(850, 10, 100, 40);
-    this.add(moodComboBox);
+    writePanel.add(moodComboBox);
 
     JTextArea contentBox = new JTextArea();
     contentBox.setText("어디서 읽은 글귀인지 적어주세요");
@@ -54,7 +66,7 @@ public class WritingPanel extends JPanel {
     });
     contentBox.setLineWrap(true);
     contentBox.setBounds(50, 60, 900, 700);
-    this.add(contentBox);
+    writePanel.add(contentBox);
 
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
@@ -65,21 +77,24 @@ public class WritingPanel extends JPanel {
 
       posts.add(new Post(sentence, content, state, selectedMood));
 
-      refreshPanel();
+      writeFrame.setVisible(false);
+//      refreshPanel();
 
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
       showContentPanel(mainPanel);
     });
 
     writingButton.setBounds(850, 800, 100, 40);
-    this.add(writingButton);
+    writePanel.add(writingButton);
+
+    writeFrame.add(writePanel);
   }
 
-  private void refreshPanel() {
-    this.removeAll();
-    this.setVisible(false);
-    this.setVisible(true);
-  }
+//  private void refreshPanel() {
+//    this.removeAll();
+//    this.setVisible(false);
+//    this.setVisible(true);
+//  }
 
   private void showContentPanel(JPanel panel) {
     mainPanel.setOpaque(false);

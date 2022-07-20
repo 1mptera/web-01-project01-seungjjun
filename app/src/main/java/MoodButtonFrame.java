@@ -26,7 +26,7 @@ public class MoodButtonFrame {
 
   private JButton lifeButton;
   private JButton motivationButton;
-  private JButton partingButton;
+  private JButton breakupButton;
   private JButton hopeButton;
 
   private Post post;
@@ -50,9 +50,9 @@ public class MoodButtonFrame {
     motivationButton.addActionListener(event -> {
       showDailySentenceFrame(motivationButton);
     });
-// breakup
-    partingButton.addActionListener(event -> {
-      showDailySentenceFrame(partingButton);
+
+    breakupButton.addActionListener(event -> {
+      showDailySentenceFrame(breakupButton);
     });
 
     hopeButton.addActionListener(event -> {
@@ -83,7 +83,7 @@ public class MoodButtonFrame {
 
     createLifeButton();
     createMotivationButton();
-    createPartingButton();
+    createBreakupButton();
     createHopeButton();
   }
 
@@ -99,10 +99,10 @@ public class MoodButtonFrame {
     moodButtonsPanel.add(motivationButton);
   }
 
-  private void createPartingButton() {
-    partingButton = new JButton("이별");
-    partingButton.setBounds(160, 110, 80, 50);
-    moodButtonsPanel.add(partingButton);
+  private void createBreakupButton() {
+    breakupButton = new JButton("이별");
+    breakupButton.setBounds(160, 110, 80, 50);
+    moodButtonsPanel.add(breakupButton);
   }
 
   private void createHopeButton() {

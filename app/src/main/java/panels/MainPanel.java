@@ -1,4 +1,4 @@
-package utils;
+package panels;
 
 import frames.WritingDetailFrame;
 import models.Post;
@@ -26,8 +26,8 @@ public class MainPanel extends JPanel {
 
   public void sentencePanel() {
     for (Post post : posts) {
-      postNumber += 1;
       if (!post.state().equals("DELETION")) {
+        postNumber += 1;
         JLabel sentenceLabel = new JLabel(
             "<html><body>"
                 + postNumber

@@ -48,20 +48,22 @@ public class WritingDetailFrame extends JFrame {
 
   private JLabel createContent() {
     JLabel informationLabel = new JLabel("글귀에 대한 정보(출처)에 대한 상세 페이지 입니다." +
-        " 어디서 읽었는지, 누가 말 했는지 등등");
-    informationLabel.setFont(new Font("Serif", Font.BOLD, 17));
+        " (어디서 읽었는지, 누가 말 했는지) ");
+    informationLabel.setFont(new Font("Serif", Font.BOLD, 18));
     informationLabel.setBounds(10,20, 800,20);
     detailPanel.add(informationLabel);
 
     JLabel titleLabel = new JLabel("제목: " + post.title());
-    titleLabel.setFont(new Font("Serif", Font.BOLD, 15));
+    titleLabel.setFont(new Font("Serif", Font.BOLD, 17));
     titleLabel.setBounds(10,70,800,20);
     detailPanel.add(titleLabel);
 
-    String content = post.content();
-    JLabel contentLabel = new JLabel("출처 : " + content);
-    contentLabel.setFont(new Font("Serif", Font.BOLD, 17));
-    contentLabel.setBounds(10, 120, 1000, 20);
+
+    JLabel contentLabel = new JLabel();
+    contentLabel.setText("<html>정보 : "
+        + post.content().replaceAll("newLine", "<br/>") + "</html>");
+    contentLabel.setFont(new Font("Serif", Font.BOLD, 16));
+    contentLabel.setBounds(10, 80, 1000, 100);
     return contentLabel;
   }
 

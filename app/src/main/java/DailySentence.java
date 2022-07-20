@@ -128,7 +128,7 @@ public class DailySentence extends JFrame{
   }
 
   public JButton createBestsellerButton() {
-    JButton bestsellerButton = new JButton("베스트셀러");
+    JButton bestsellerButton = new JButton("책 추천 순위");
     bestsellerButton.addActionListener(event -> {
       JPanel bestsellerPanel = new BestsellerPanel(book, books, contentPanel);
 
@@ -139,6 +139,7 @@ public class DailySentence extends JFrame{
 
   public void randomSentence(String mood) {
     boolean isClickedMoodEqualsRandomMood = true;
+
     while (isClickedMoodEqualsRandomMood) {
       Random random = new Random();
 

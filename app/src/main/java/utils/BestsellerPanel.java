@@ -87,7 +87,7 @@ public class BestsellerPanel extends JPanel {
 
   public void createWriteButton() {
     JPanel writeButtonPanel = new JPanel();
-    JButton writeButton = new JButton("추천할 책 공유하기");
+    JButton writeButton = new JButton("책 추천하기");
 
     writeButton.addActionListener(event -> {
       JFrame writeBookRecommendFrame = new WriteBookRecommendFrame(book, books, this, contentPanel);

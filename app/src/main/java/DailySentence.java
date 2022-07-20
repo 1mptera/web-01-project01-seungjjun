@@ -4,6 +4,7 @@ import models.Post;
 import panels.BookRankingPanel;
 import panels.MainPanel;
 import frames.WritingFrame;
+import panels.RandomSentencePanel;
 import utils.BookLoader;
 import utils.PostLoader;
 
@@ -15,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 class TotalPanel extends JPanel{
   private Image img;
@@ -33,22 +33,24 @@ class TotalPanel extends JPanel{
 }
 
 public class DailySentence extends JFrame{
+  private RandomSentencePanel randomSentencePanel;
   private Book book;
 
   private List<Post> posts;
   private List<Book> books;
 
-
   private JFrame frame;
 
-  private JPanel contentPanel;
-  private MainPanel mainPanel;
-  private String mood;
   private JPanel totalPanel;
+  private JPanel contentPanel;
   private JPanel menuPanel;
-  private JLabel sentenceLabel;
+  private MainPanel mainPanel;
+
+  private String mood;
 
   DailySentence(String mood) throws FileNotFoundException {
+    randomSentencePanel = new RandomSentencePanel();
+
     book = new Book();
 
     this.mood = mood;
@@ -92,7 +94,7 @@ public class DailySentence extends JFrame{
     contentPanel.setBounds(0,100,1000,900);
     contentPanel.setOpaque(false);
 
-    randomSentence(mood);
+    randomSentencePanel.randomSentence(posts, mood, totalPanel);
 
     totalPanel.add(contentPanel);
   }
@@ -147,45 +149,9 @@ public class DailySentence extends JFrame{
     return storageButton;
   }
 
-  public void randomSentence(String mood) {
-    boolean isClickedMoodEqualsRandomMood = true;
-
-    while (isClickedMoodEqualsRandomMood) {
-      Random random = new Random();
-
-      String randomPost = String.valueOf(posts.get(random.nextInt(posts.size())));
-
-      String postMood = parsePostMood(randomPost);
-      String sentence = parsePostSentence(randomPost);
-
-      if(postMood.equals(mood)) {
-        sentenceLabel = new JLabel("<html><body style='text-align:center;'>"
-            + sentence
-            + "</body></html>");
-
-        sentenceLabel.setBounds(260,300,1000,100);
-        sentenceLabel.setFont(new Font("Serif", Font.BOLD, 17));
-
-        totalPanel.add(sentenceLabel);
-        isClickedMoodEqualsRandomMood = false;
-      }
-    }
-  }
-
-  public String parsePostSentence(String randomPost) {
-    String[] sentences = randomPost.split(",");
-
-    return sentences[0];
-  }
-
-  public String parsePostMood(String randomPost) {
-    String[] moods = randomPost.split(",");
-
-    return moods[3];
-  }
-
   public void showBookRankingPanel(JPanel panel) {
-    totalPanel.remove(sentenceLabel);
+    totalPanel.remove(randomSentencePanel.sentenceLabel);
+    totalPanel.remove(randomSentencePanel.saveButton);
     contentPanel.removeAll();
     contentPanel.add(panel);
     contentPanel.setVisible(false);
@@ -194,13 +160,8 @@ public class DailySentence extends JFrame{
   }
 
   public void showContentPanel(JPanel panel) {
-    totalPanel.remove(sentenceLabel);
     mainPanel.setOpaque(false);
-    contentPanel.removeAll();
-    contentPanel.add(panel);
-    contentPanel.setVisible(false);
-    contentPanel.setVisible(true);
-    frame.setVisible(true);
+    showBookRankingPanel(panel);
   }
 
   public void postWriter() {

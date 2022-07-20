@@ -1,6 +1,7 @@
-package utils;
+package frames;
 
 import models.Post;
+import utils.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,6 +120,7 @@ public class WritingDetailFrame extends JFrame {
     deleteButton.addActionListener(event -> {
       post.deletion();
       detailFrame.setVisible(false);
+
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);
       showContentPanel(mainPanel);
     });

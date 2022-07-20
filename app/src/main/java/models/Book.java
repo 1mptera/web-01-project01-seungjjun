@@ -53,6 +53,14 @@ public class Book {
     return summary;
   }
 
+  public String state() {
+    return state;
+  }
+
+  public void deletion() {
+    this.state = Book.DELETION;
+  }
+
   public String toCsvRow() {
     return starRating + "`" +
         title + "`" +

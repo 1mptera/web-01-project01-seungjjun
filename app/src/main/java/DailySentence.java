@@ -1,6 +1,5 @@
 import models.Book;
 import models.Post;
-import org.checkerframework.checker.units.qual.A;
 import utils.BestsellerPanel;
 import utils.MainPanel;
 import utils.WritingPanel;
@@ -35,6 +34,7 @@ public class DailySentence extends JFrame{
 
   private List<Post> posts;
   private List<Book> books;
+
 
   private JFrame frame;
 

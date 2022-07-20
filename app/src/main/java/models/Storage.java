@@ -23,4 +23,9 @@ public class Storage {
   public String state() {
     return state;
   }
+
+  @Override
+  public String toString() {
+    return sentence;
+  }
 }

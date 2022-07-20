@@ -1,9 +1,14 @@
 package utils;
 
+import frames.BookDetailFrame;
+import frames.StarRatingFrame;
+import frames.WriteBookRecommendFrame;
 import models.Book;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -60,17 +65,24 @@ public class BestsellerPanel extends JPanel {
     bookListPanel = new JPanel();
     bookListPanel.setLayout(new GridLayout(0, 2));
     for (Book book : books) {
-      bestsellerLabel = new JLabel("평점: " + book.starRating() + "  "+ book.title());
-      JButton starRating = new JButton("평점 주기");
-      starRating.addActionListener(event -> {
-        JFrame starRatingFrame = new StarRatingFrame(book, books, contentPanel);
-      });
-      bookListPanel.add(bestsellerLabel);
-      bookListPanel.add(starRating);
-    }
+      if(!book.state().equals("DELETION")) {
+        bestsellerLabel = new JLabel("평점: " + book.starRating() + "  "+ book.title());
+        bestsellerLabel.addMouseListener(new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            JFrame bookDetailFrame = new BookDetailFrame(book, books, contentPanel);
+          }
+        });
+        JButton starRating = new JButton("평점 주기");
+        starRating.addActionListener(event -> {
+          JFrame starRatingFrame = new StarRatingFrame(book, books, contentPanel);
+        });
+        bookListPanel.add(bestsellerLabel);
+        bookListPanel.add(starRating);
+      }
 
-    bookListPanel.setOpaque(false);
-    this.add(bookListPanel);
+      bookListPanel.setOpaque(false);
+      this.add(bookListPanel);
+      }
   }
 
   public void createWriteButton() {

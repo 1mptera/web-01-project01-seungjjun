@@ -1,6 +1,7 @@
-package utils;
+package frames;
 
 import models.Book;
+import utils.BestsellerPanel;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

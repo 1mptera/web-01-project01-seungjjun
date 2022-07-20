@@ -1,5 +1,6 @@
 package utils;
 
+import frames.WritingDetailFrame;
 import models.Post;
 
 import javax.swing.*;

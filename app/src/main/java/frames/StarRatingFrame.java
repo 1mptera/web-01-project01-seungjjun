@@ -1,6 +1,7 @@
-package utils;
+package frames;
 
 import models.Book;
+import utils.BestsellerPanel;
 
 import javax.swing.*;
 import java.util.List;
@@ -20,7 +21,7 @@ public class StarRatingFrame extends JFrame {
   private String totalStar;
   private String starRating;
 
-  StarRatingFrame(Book book, List<Book> books, JPanel contentPanel) {
+  public StarRatingFrame(Book book, List<Book> books, JPanel contentPanel) {
     this.book = book;
     this.books = books;
     this.contentPanel = contentPanel;

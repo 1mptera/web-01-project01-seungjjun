@@ -52,7 +52,7 @@ public class WriteBookRecommendFrame extends JFrame {
 
   private JTextField createTitleBox() {
     titleBox = new JTextField(20);
-    titleBox.setText("책 제목을 써주세요.");
+    titleBox.setText("좋은 문구가 들어간 책을 추천해 주세요!!");
     titleBox.addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         titleBox.setText("");
@@ -65,7 +65,7 @@ public class WriteBookRecommendFrame extends JFrame {
 
   private JTextArea createContentBox() {
     contentBox = new JTextArea();
-    contentBox.setText("책 줄거리를 요약해서 써주세요.");
+    contentBox.setText("인상깊었던 문장이나, 남들에게 공유하고 싶은 문구를 적어주세요.");
     contentBox.addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         contentBox.setText("");

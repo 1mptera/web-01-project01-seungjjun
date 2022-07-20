@@ -42,20 +42,16 @@ public class BookDetailFrame extends JFrame {
   }
 
   private JLabel createContent() {
-    JLabel informationLabel = new JLabel("책에 대한 간단한 정보입니다.");
-    informationLabel.setFont(new Font("Serif", Font.BOLD, 17));
-    informationLabel.setBounds(10,20, 800,20);
-    bookDetailPanel.add(informationLabel);
-
     JLabel titleLabel = new JLabel("제목: " + book.title());
-    titleLabel.setFont(new Font("Serif", Font.BOLD, 15));
-    titleLabel.setBounds(10,70,800,20);
+    titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
+    titleLabel.setBounds(10,20,800,20);
     bookDetailPanel.add(titleLabel);
 
-    String content = book.summary();
-    JLabel contentLabel = new JLabel("어떤 책인가? : " + content);
+    JLabel contentLabel = new JLabel();
+    contentLabel.setText("<html>정보 : "
+        + book.summary().replaceAll("newLine", "<br/>") + "</html>");
     contentLabel.setFont(new Font("Serif", Font.BOLD, 17));
-    contentLabel.setBounds(10, 120, 1000, 100);
+    contentLabel.setBounds(10, 50, 1000, 700);
     return contentLabel;
   }
 

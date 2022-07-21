@@ -19,12 +19,15 @@ public class RandomSentencePanel {
 
   public JLabel sentenceLabel;
   public JButton saveButton;
+  private Random random;
 
   public void randomSentence(
       List<Post> posts,
       List<Storage> storages,
       String mood,
       JPanel totalPanel) {
+
+    random = new Random();
 
     this.posts = posts;
     this.storages = storages;
@@ -33,8 +36,6 @@ public class RandomSentencePanel {
     boolean isClickedMoodEqualsRandomMood = true;
 
     while (isClickedMoodEqualsRandomMood) {
-      Random random = new Random();
-
       String randomPost = String.valueOf(posts.get(random.nextInt(posts.size())));
 
       String postMood = parsePostMood(randomPost);

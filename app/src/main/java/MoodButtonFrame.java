@@ -1,7 +1,7 @@
-import models.Post;
-import panels.MoodButtonsPanel;
+import panels.MoodButtonImagePanel;
 
 import javax.swing.*;
+import javax.swing.text.html.ImageView;
 import java.io.FileNotFoundException;
 
 public class MoodButtonFrame {
@@ -60,7 +60,7 @@ public class MoodButtonFrame {
   }
 
   public void setButtonsLayout() {
-    moodButtonsPanel = new MoodButtonsPanel(
+    moodButtonsPanel = new MoodButtonImagePanel(
         new ImageIcon("./app/src/main/img/background.jpeg").getImage());
 
     buttonFrame.add(moodButtonsPanel);

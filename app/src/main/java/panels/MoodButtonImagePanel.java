@@ -3,10 +3,10 @@ package panels;
 import javax.swing.*;
 import java.awt.*;
 
-public class MoodButtonsPanel extends JPanel {
+public class MoodButtonImagePanel extends JPanel {
   private Image img;
 
-  public MoodButtonsPanel(Image img) {
+  public MoodButtonImagePanel(Image img) {
     this.img = img;
     setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
     setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));

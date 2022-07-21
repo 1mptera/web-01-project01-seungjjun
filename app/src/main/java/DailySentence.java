@@ -5,9 +5,9 @@ import models.Storage;
 
 import panels.BookRankingPanel;
 import panels.MainPanel;
-import frames.WritingFrame;
+import frames.WritingPostFrame;
 import panels.RandomSentencePanel;
-import panels.TotalPanel;
+import panels.MainImagePanel;
 import utils.BookLoader;
 import utils.PostLoader;
 import utils.StorageLoader;
@@ -19,8 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DailySentence extends JFrame {
+  private Random random;
+
   private RandomSentencePanel randomSentencePanel;
   private Book book;
 
@@ -39,6 +42,8 @@ public class DailySentence extends JFrame {
 
   DailySentence(String mood) throws FileNotFoundException {
     randomSentencePanel = new RandomSentencePanel();
+    random = new Random();
+
 
     book = new Book();
 
@@ -74,13 +79,25 @@ public class DailySentence extends JFrame {
   }
 
   private void initTotalPanel() {
-    totalPanel = new TotalPanel(new ImageIcon(
-        "./app/src/main/img/MainFrameBackground.jpeg").getImage());
+    randomImageDisplay();
 
     frame.add(totalPanel);
 
     initMenuButtons();
     initContentPanel(mood);
+  }
+
+  public void randomImageDisplay() {
+    ImageIcon[] imgaes = {
+        new ImageIcon("./app/src/main/img/background1.jpeg"),
+        new ImageIcon("./app/src/main/img/background2.jpeg"),
+        new ImageIcon("./app/src/main/img/background3.jpeg"),
+        new ImageIcon("./app/src/main/img/background4.jpeg"),
+        new ImageIcon("./app/src/main/img/background5.jpeg")
+    };
+
+    totalPanel = new MainImagePanel(new ImageIcon(String.valueOf(
+        imgaes[random.nextInt(imgaes.length)])).getImage());
   }
 
   public void initContentPanel(String mood) {
@@ -119,7 +136,7 @@ public class DailySentence extends JFrame {
   public JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JFrame writingFrame = new WritingFrame(posts, mainPanel, contentPanel, menuPanel);
+      JFrame writingPostFrame = new WritingPostFrame(posts, mainPanel, contentPanel, menuPanel);
     });
 
     return writingButton;

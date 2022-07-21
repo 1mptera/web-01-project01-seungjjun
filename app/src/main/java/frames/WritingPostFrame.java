@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class WritingFrame extends JFrame {
+public class WritingPostFrame extends JFrame {
   private Post post;
 
   private List<Post> posts;
@@ -22,10 +22,10 @@ public class WritingFrame extends JFrame {
 
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
 
-  public WritingFrame(List<Post> posts,
-                      JPanel mainPanel,
-                      JPanel contentPanel,
-                      JPanel menuPanel) {
+  public WritingPostFrame(List<Post> posts,
+                          JPanel mainPanel,
+                          JPanel contentPanel,
+                          JPanel menuPanel) {
 
     this.posts = posts;
     this.mainPanel = mainPanel;

@@ -1,7 +1,6 @@
 import panels.MoodButtonImagePanel;
 
 import javax.swing.*;
-import javax.swing.text.html.ImageView;
 import java.io.FileNotFoundException;
 
 public class MoodButtonFrame {

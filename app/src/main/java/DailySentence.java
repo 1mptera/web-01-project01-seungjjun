@@ -7,9 +7,9 @@ import panels.BookRankingPanel;
 import panels.MainPanel;
 import frames.WritingPostFrame;
 import panels.RandomSentencePanel;
-import panels.MainImagePanel;
 import utils.BookLoader;
 import utils.PostLoader;
+import utils.RandomImageDisplayer;
 import utils.StorageLoader;
 
 import javax.swing.*;
@@ -24,9 +24,10 @@ import java.util.Random;
 public class DailySentence extends JFrame {
   private Random random;
 
+  private RandomImageDisplayer randomImageDisplayer;
   private RandomSentencePanel randomSentencePanel;
-  private Book book;
 
+  private Book book;
   private List<Post> posts;
   private List<Book> books;
   private List<Storage> storages;
@@ -42,6 +43,7 @@ public class DailySentence extends JFrame {
 
   DailySentence(String mood) throws FileNotFoundException {
     randomSentencePanel = new RandomSentencePanel();
+    randomImageDisplayer = new RandomImageDisplayer();
     random = new Random();
 
 
@@ -79,25 +81,12 @@ public class DailySentence extends JFrame {
   }
 
   private void initTotalPanel() {
-    randomImageDisplay();
+    totalPanel = randomImageDisplayer.randomImageDisplay(totalPanel);
 
     frame.add(totalPanel);
 
     initMenuButtons();
     initContentPanel(mood);
-  }
-
-  public void randomImageDisplay() {
-    ImageIcon[] imgaes = {
-        new ImageIcon("./app/src/main/img/background1.jpeg"),
-        new ImageIcon("./app/src/main/img/background2.jpeg"),
-        new ImageIcon("./app/src/main/img/background3.jpeg"),
-        new ImageIcon("./app/src/main/img/background4.jpeg"),
-        new ImageIcon("./app/src/main/img/background5.jpeg")
-    };
-
-    totalPanel = new MainImagePanel(new ImageIcon(String.valueOf(
-        imgaes[random.nextInt(imgaes.length)])).getImage());
   }
 
   public void initContentPanel(String mood) {

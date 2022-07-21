@@ -34,7 +34,7 @@ public class StarRatingCalculator {
 
   public String computeAverageStarRating(String count) {
     starRating = String.valueOf(
-        Double.parseDouble(totalStar) / Double.parseDouble(count));
+        String.format("%.1f", Double.parseDouble(totalStar) / Double.parseDouble(count)));
 
     return starRating;
   }

@@ -1,4 +1,4 @@
-import panels.MoodButtonImagePanel;
+import panels.ImagePanel;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -59,7 +59,7 @@ public class MoodButtonFrame {
   }
 
   public void setButtonsLayout() {
-    moodButtonsPanel = new MoodButtonImagePanel(
+    moodButtonsPanel = new ImagePanel(
         new ImageIcon("./app/src/main/img/background.jpeg").getImage());
 
     buttonFrame.add(moodButtonsPanel);

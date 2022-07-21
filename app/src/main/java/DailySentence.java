@@ -7,12 +7,12 @@ import panels.BookRankingPanel;
 import panels.MainPanel;
 import frames.WritingFrame;
 import panels.RandomSentencePanel;
+import panels.TotalPanel;
 import utils.BookLoader;
 import utils.PostLoader;
 import utils.StorageLoader;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -20,22 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class TotalPanel extends JPanel{
-  private Image img;
-
-  public TotalPanel(Image img) {
-    this.img = img;
-    setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-    setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-    setLayout(null);
-  }
-
-  public void paintComponent(Graphics g) {
-    g.drawImage(img, 0, 0 ,null);
-  }
-}
-
-public class DailySentence extends JFrame{
+public class DailySentence extends JFrame {
   private RandomSentencePanel randomSentencePanel;
   private Book book;
 
@@ -100,7 +85,7 @@ public class DailySentence extends JFrame{
 
   public void initContentPanel(String mood) {
     contentPanel = new JPanel();
-    contentPanel.setBounds(0,100,1000,900);
+    contentPanel.setBounds(0, 100, 1000, 900);
     contentPanel.setOpaque(false);
 
     randomSentencePanel.randomSentence(posts, storages, mood, totalPanel);
@@ -110,7 +95,7 @@ public class DailySentence extends JFrame{
 
   public void initMenuButtons() {
     menuPanel = new JPanel();
-    menuPanel.setBounds(230,10,500,500);
+    menuPanel.setBounds(230, 10, 500, 500);
     menuPanel.setOpaque(false);
     totalPanel.add(menuPanel);
 

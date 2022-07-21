@@ -40,17 +40,17 @@ public class RandomSentencePanel {
       String postMood = parsePostMood(randomPost);
       String sentence = parsePostSentence(randomPost);
 
-      if(postMood.equals(mood)) {
-        sentenceLabel = new JLabel("<html><body style='text-align:center;'>"
-            + sentence
-            + "</body></html>");
-        sentenceLabel.setBounds(260,300,1000,100);
+      if (postMood.equals(mood)) {
+        sentenceLabel = new JLabel("<html>"
+            + sentence.replaceAll("newLine", "<br/>")
+            + "</html>");
+        sentenceLabel.setBounds(260, 300, 1000, 100);
         sentenceLabel.setFont(new Font("Serif", Font.BOLD, 17));
 
         totalPanel.add(sentenceLabel);
 
         saveButton = new JButton("저장하기");
-        saveButton.setBounds(880,800,80,30);
+        saveButton.setBounds(880, 800, 80, 30);
 
         sentenceLoader.saveSentence(storages, sentence, saveButton, totalPanel);
 

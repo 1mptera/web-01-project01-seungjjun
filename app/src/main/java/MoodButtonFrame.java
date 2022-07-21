@@ -1,23 +1,8 @@
 import models.Post;
+import panels.MoodButtonsPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.FileNotFoundException;
-
-class MoodButtonsPanel extends JPanel{
-  private Image img;
-
-  public MoodButtonsPanel(Image img) {
-    this.img = img;
-    setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-    setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-    setLayout(null);
-  }
-
-  public void paintComponent(Graphics g) {
-    g.drawImage(img, 0, 0 ,null);
-  }
-}
 
 public class MoodButtonFrame {
   private JFrame buttonFrame;
@@ -28,8 +13,6 @@ public class MoodButtonFrame {
   private JButton motivationButton;
   private JButton breakupButton;
   private JButton hopeButton;
-
-  private Post post;
 
   public static void main(String[] args) {
     MoodButtonFrame application = new MoodButtonFrame();
@@ -72,12 +55,13 @@ public class MoodButtonFrame {
 
   public void initFrame() {
     buttonFrame = new JFrame("기분에 맞는 버튼을 선택하세요");
-    buttonFrame.setSize(500,500);
+    buttonFrame.setSize(500, 500);
     buttonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   public void setButtonsLayout() {
-    moodButtonsPanel = new MoodButtonsPanel(new ImageIcon("./app/src/main/img/background.jpeg").getImage());
+    moodButtonsPanel = new MoodButtonsPanel(
+        new ImageIcon("./app/src/main/img/background.jpeg").getImage());
 
     buttonFrame.add(moodButtonsPanel);
 
@@ -89,13 +73,13 @@ public class MoodButtonFrame {
 
   private void createLifeButton() {
     lifeButton = new JButton("인생");
-    lifeButton.setBounds(160,20,80,50);
+    lifeButton.setBounds(160, 20, 80, 50);
     moodButtonsPanel.add(lifeButton);
   }
 
   private void createMotivationButton() {
     motivationButton = new JButton("동기부여");
-    motivationButton.setBounds(290,20,80,50);
+    motivationButton.setBounds(290, 20, 80, 50);
     moodButtonsPanel.add(motivationButton);
   }
 
@@ -107,7 +91,7 @@ public class MoodButtonFrame {
 
   private void createHopeButton() {
     hopeButton = new JButton("희망");
-    hopeButton.setBounds(290,110,80,50);
+    hopeButton.setBounds(290, 110, 80, 50);
     moodButtonsPanel.add(hopeButton);
   }
 }

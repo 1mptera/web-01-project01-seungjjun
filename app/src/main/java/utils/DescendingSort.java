@@ -26,7 +26,7 @@ public class DescendingSort {
   }
 
   public void ConversionToString(List<Book> books) {
-    for(Book book : books) {
+    for (Book book : books) {
       String line = book.toCsvRow();
       stringBooks.add(line);
     }
@@ -37,7 +37,7 @@ public class DescendingSort {
   }
 
   public void ConversionToBook() {
-    for(int i = 0; i < stringBooks.size(); i += 1) {
+    for (int i = 0; i < stringBooks.size(); i += 1) {
       String line = stringBooks.get(i);
       this.book = transform(line);
       descendingBooks.add(this.book);
@@ -48,11 +48,11 @@ public class DescendingSort {
     String[] bookInformation = line.split("`");
 
     return new Book(bookInformation[0]
-        ,bookInformation[1]
-        ,bookInformation[2]
-        ,bookInformation[3]
-        ,bookInformation[4]
-        ,bookInformation[5]);
+        , bookInformation[1]
+        , bookInformation[2]
+        , bookInformation[3]
+        , bookInformation[4]
+        , bookInformation[5]);
   }
 
   public void changeBooksToDescendingBooks(List<Book> books) {

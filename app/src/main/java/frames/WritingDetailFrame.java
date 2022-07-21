@@ -50,12 +50,12 @@ public class WritingDetailFrame extends JFrame {
     JLabel informationLabel = new JLabel("글귀에 대한 정보(출처)에 대한 상세 페이지 입니다." +
         " (어디서 읽었는지, 누가 말 했는지) ");
     informationLabel.setFont(new Font("Serif", Font.BOLD, 18));
-    informationLabel.setBounds(10,20, 800,20);
+    informationLabel.setBounds(10, 20, 800, 20);
     detailPanel.add(informationLabel);
 
     JLabel titleLabel = new JLabel("제목: " + post.title());
     titleLabel.setFont(new Font("Serif", Font.BOLD, 17));
-    titleLabel.setBounds(10,70,800,20);
+    titleLabel.setBounds(10, 70, 800, 20);
     detailPanel.add(titleLabel);
 
 
@@ -71,7 +71,7 @@ public class WritingDetailFrame extends JFrame {
     String mood = post.mood();
     JLabel moodLabel = new JLabel("카테고리: " + mood);
     moodLabel.setFont(new Font("Serif", Font.BOLD, 15));
-    moodLabel.setBounds(880,20,100,30);
+    moodLabel.setBounds(880, 20, 100, 30);
     return moodLabel;
   }
 
@@ -131,7 +131,7 @@ public class WritingDetailFrame extends JFrame {
 
   private JButton createGoBackButton() {
     JButton goBackButton = new JButton("뒤로가기");
-    goBackButton.setBounds(20,800,100,40);
+    goBackButton.setBounds(20, 800, 100, 40);
     goBackButton.addActionListener(event -> {
       detailFrame.setVisible(false);
       mainPanel = new MainPanel(posts, mainPanel, contentPanel);

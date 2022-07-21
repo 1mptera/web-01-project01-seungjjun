@@ -44,7 +44,7 @@ public class BookDetailFrame extends JFrame {
   private JLabel createContent() {
     JLabel titleLabel = new JLabel("제목: " + book.title());
     titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
-    titleLabel.setBounds(10,20,800,20);
+    titleLabel.setBounds(10, 20, 800, 20);
     bookDetailPanel.add(titleLabel);
 
     JLabel contentLabel = new JLabel();
@@ -69,7 +69,7 @@ public class BookDetailFrame extends JFrame {
 
   private JButton createGoBackButton() {
     JButton goBackButton = new JButton("뒤로가기");
-    goBackButton.setBounds(20,800,100,40);
+    goBackButton.setBounds(20, 800, 100, 40);
     goBackButton.addActionListener(event -> {
       bookDetailFrame.setVisible(false);
       bookRankingPanel = new BookRankingPanel(book, books, contentPanel);

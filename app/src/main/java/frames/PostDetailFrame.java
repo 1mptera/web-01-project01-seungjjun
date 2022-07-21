@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class WritingDetailFrame extends JFrame {
+public class PostDetailFrame extends JFrame {
   private List<Post> posts;
   private Post post;
   private JPanel mainPanel;
@@ -18,7 +18,7 @@ public class WritingDetailFrame extends JFrame {
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
   private JPanel contentPanel;
 
-  public WritingDetailFrame(List<Post> posts, Post post, JPanel mainPanel, JPanel contentPanel) {
+  public PostDetailFrame(List<Post> posts, Post post, JPanel mainPanel, JPanel contentPanel) {
     this.posts = posts;
     this.post = post;
     this.mainPanel = mainPanel;

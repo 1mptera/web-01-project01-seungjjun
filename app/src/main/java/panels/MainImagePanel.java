@@ -3,10 +3,10 @@ package panels;
 import javax.swing.*;
 import java.awt.*;
 
-public class TotalPanel extends JPanel {
+public class MainImagePanel extends JPanel {
   private Image img;
 
-  public TotalPanel(Image img) {
+  public MainImagePanel(Image img) {
     this.img = img;
     setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
     setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));

@@ -1,6 +1,6 @@
 package panels;
 
-import frames.WritingDetailFrame;
+import frames.PostDetailFrame;
 import models.Post;
 
 import javax.swing.*;
@@ -39,7 +39,7 @@ public class MainPanel extends JPanel {
 
         sentenceLabel.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
-            JFrame writingDetailFrame = new WritingDetailFrame(posts, post, mainPanel, contentPanel);
+            JFrame postDetailFrame = new PostDetailFrame(posts, post, mainPanel, contentPanel);
           }
         });
         this.add(sentenceLabel);

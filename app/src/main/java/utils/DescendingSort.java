@@ -16,12 +16,16 @@ public class DescendingSort {
   public void descending(Book book, List<Book> books) {
     this.book = book;
 
+    // 내림차순 하기 위해 Book -> String 타입으로 변환
     ConversionToString(books);
 
+    // 변환된 String 타입의 book 리스트를 내림차순
     descendingSort(stringBooks);
 
+    // 다시 내림차순된 String 타입을 Book 타입으로 변환
     ConversionToBook();
 
+    // 기존 Book 타입의 리스트에 저장된 요소들을 내림차순된 요소들로 바꿔주는 작업
     changeBooksToDescendingBooks(books);
   }
 

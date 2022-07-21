@@ -37,6 +37,8 @@ public class BookDetailFrame extends JFrame {
     bookDetailPanel.setLayout(null);
 
     bookDetailPanel.add(createContent());
+    bookDetailPanel.add(createStarRatingLabel());
+    bookDetailPanel.add(createParticipantNumberLabel());
     bookDetailPanel.add(createDeleteButton());
     bookDetailPanel.add(createGoBackButton());
   }
@@ -51,8 +53,22 @@ public class BookDetailFrame extends JFrame {
     contentLabel.setText("<html>인상 깊은 문장 : "
         + book.summary().replaceAll("newLine", "<br/>") + "</html>");
     contentLabel.setFont(new Font("Serif", Font.BOLD, 17));
-    contentLabel.setBounds(10, 50, 1000, 700);
+    contentLabel.setBounds(10, 50, 1000, 500);
     return contentLabel;
+  }
+
+  private JLabel createStarRatingLabel() {
+    JLabel starRatingLabel = new JLabel("평점: " + book.starRating());
+    starRatingLabel.setFont(new Font("Serif", Font.BOLD, 20));
+    starRatingLabel.setBounds(900, 20, 100, 20);
+    return starRatingLabel;
+  }
+
+  private JLabel createParticipantNumberLabel() {
+    JLabel participantNumberLabel = new JLabel(book.clickedNumber() + "명 참여");
+    participantNumberLabel.setFont(new Font("Serif", Font.ITALIC, 16));
+    participantNumberLabel.setBounds(930,40,100,20);
+    return participantNumberLabel;
   }
 
   private JButton createDeleteButton() {

@@ -32,8 +32,8 @@ public class MainPanel extends JPanel {
             "<html><body>"
                 + postNumber
                 + ". "
-                + post.title()
-                + "<br><br></body></html>");
+                + post.title().replaceAll("newLine", "<br/>")
+                + "<br></body></html>");
 
         sentenceLabel.setFont(new Font("Serif", Font.BOLD, 15));
 

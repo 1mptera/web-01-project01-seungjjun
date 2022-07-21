@@ -40,24 +40,31 @@ public class BookRankingPanel extends JPanel {
     bookListPanel = new JPanel();
     bookListPanel.setLayout(new GridLayout(0, 2));
     for (Book book : books) {
-      if(!book.state().equals("DELETION")) {
-        bookRankingLabel = new JLabel("평점: " + book.starRating() + "  "+ book.title());
+      if (!book.state().equals("DELETION")) {
+        bookRankingLabel = new JLabel(
+            "평점: "
+                + book.starRating()
+                + "  "
+                + book.title());
+
         bookRankingLabel.addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {
             JFrame bookDetailFrame = new BookDetailFrame(book, books, contentPanel);
           }
         });
+
         JButton starRating = new JButton("평점 주기");
         starRating.addActionListener(event -> {
           JFrame starRatingFrame = new StarRatingFrame(book, books, contentPanel);
         });
+
         bookListPanel.add(bookRankingLabel);
         bookListPanel.add(starRating);
       }
 
       bookListPanel.setOpaque(false);
       this.add(bookListPanel);
-      }
+    }
   }
 
   public void createWriteButton() {
@@ -65,7 +72,11 @@ public class BookRankingPanel extends JPanel {
     JButton writeButton = new JButton("책 추천하기");
 
     writeButton.addActionListener(event -> {
-      JFrame writeBookRecommendFrame = new WritingBookRecommendFrame(book, books, this, contentPanel);
+      JFrame writeBookRecommendFrame = new WritingBookRecommendFrame(
+          book,
+          books,
+          this,
+          contentPanel);
     });
 
     writeButtonPanel.add(writeButton);

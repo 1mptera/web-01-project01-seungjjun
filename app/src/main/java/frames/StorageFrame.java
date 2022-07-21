@@ -38,7 +38,7 @@ public class StorageFrame extends JFrame {
 
   private void initContentPanel() {
     JPanel contentPanel = new JPanel();
-    contentPanel.setLayout(new GridLayout(0,1));
+    contentPanel.setLayout(new GridLayout(0, 1));
 
     for (Storage storage : storages) {
       if (!storage.state().equals("DELETION")) {

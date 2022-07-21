@@ -107,6 +107,6 @@ public class Book {
 
   @Override
   public String toString() {
-    return starRating +  title +  summary + state + clickedNumber;
+    return starRating + title + summary + state + clickedNumber;
   }
 }

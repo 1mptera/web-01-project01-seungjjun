@@ -10,7 +10,7 @@ import java.util.List;
 public class StarRatingFrame extends JFrame {
   private StarRatingCalculator starRatingCalculator;
 
-  private String[] star = {"⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"};
+  private String[] star = {"⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"};
   private List<Book> books;
   private Book book;
 
@@ -30,7 +30,7 @@ public class StarRatingFrame extends JFrame {
     this.contentPanel = contentPanel;
 
     starRatingFrame = new JFrame("별점주기");
-    starRatingFrame.setSize(200,200);
+    starRatingFrame.setSize(200, 200);
     starRatingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     createContent();
@@ -57,7 +57,7 @@ public class StarRatingFrame extends JFrame {
 
   public JComboBox createComboBox() {
     starRatingComboBox = new JComboBox(star);
-    starRatingComboBox.setBounds(50,30,130,40);
+    starRatingComboBox.setBounds(50, 30, 130, 40);
     return starRatingComboBox;
   }
 
@@ -71,7 +71,7 @@ public class StarRatingFrame extends JFrame {
       bookRankingPanel = new BookRankingPanel(book, books, contentPanel);
       showContentPanel(bookRankingPanel);
     });
-    starRatingButton.setBounds(50,70,100,30);
+    starRatingButton.setBounds(50, 70, 100, 30);
     return starRatingButton;
   }
 

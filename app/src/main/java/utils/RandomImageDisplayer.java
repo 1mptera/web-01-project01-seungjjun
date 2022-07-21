@@ -1,6 +1,6 @@
 package utils;
 
-import panels.MainImagePanel;
+import panels.ImagePanel;
 
 import javax.swing.*;
 import java.util.Random;
@@ -23,7 +23,7 @@ public class RandomImageDisplayer {
         new ImageIcon("./app/src/main/img/background5.jpeg")
     };
 
-    totalPanel = new MainImagePanel(new ImageIcon(String.valueOf(
+    totalPanel = new ImagePanel(new ImageIcon(String.valueOf(
         imgaes[random.nextInt(imgaes.length)])).getImage());
 
     return totalPanel;

@@ -2,6 +2,7 @@ package frames;
 
 import models.Book;
 import panels.BookRankingPanel;
+import panels.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,8 @@ public class BookDetailFrame extends JFrame {
   }
 
   private void initContent() {
-    bookDetailPanel = new JPanel();
+    bookDetailPanel = new ImagePanel(new ImageIcon(
+        "./app/src/main/img/detailBackground.jpeg").getImage());
     bookDetailPanel.setLayout(null);
 
     bookDetailPanel.add(createContent());
@@ -60,7 +62,7 @@ public class BookDetailFrame extends JFrame {
   private JLabel createStarRatingLabel() {
     JLabel starRatingLabel = new JLabel("평점: " + book.starRating());
     starRatingLabel.setFont(new Font("Serif", Font.BOLD, 20));
-    starRatingLabel.setBounds(900, 20, 100, 20);
+    starRatingLabel.setBounds(915, 20, 100, 20);
     return starRatingLabel;
   }
 

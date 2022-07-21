@@ -1,6 +1,7 @@
 package frames;
 
 import models.Post;
+import panels.ImagePanel;
 import panels.MainPanel;
 
 import javax.swing.*;
@@ -34,7 +35,8 @@ public class PostDetailFrame extends JFrame {
   }
 
   private void loadContent() {
-    detailPanel = new JPanel();
+    detailPanel = new ImagePanel(new ImageIcon(
+        "./app/src/main/img/detailBackground.jpeg").getImage());
     detailPanel.setLayout(null);
 
     detailPanel.add(createContent());

@@ -17,12 +17,11 @@ public class Post {
     this.like = 0;
   }
 
-  public Post(String title, String content, String state, String mood, String like) {
+  public Post(String title, String content, String state, String mood) {
     this.title = title;
     this.content = content;
     this.state = state;
     this.mood = mood;
-    this.like = Integer.parseInt(like);
   }
 
   public String state() {
@@ -58,19 +57,11 @@ public class Post {
   }
 
   public String toCsvRow() {
-    return title + "," + content + "," + state + "," + mood + "," + like;
-  }
-
-  public int like() {
-    return like;
-  }
-
-  public void addLikeCount() {
-    like += 1;
+    return title + "," + content + "," + state + "," + mood;
   }
 
   @Override
   public String toString() {
-    return title + "," + content + "," + state + "," + mood + "," + like;
+    return title + "," + content + "," + state + "," + mood;
   }
 }

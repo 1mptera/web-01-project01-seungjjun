@@ -78,7 +78,7 @@ public class WritingPostFrame extends JFrame {
       String state = "EXISTENCE";
       String selectedMood = String.valueOf(moodComboBox.getSelectedItem());
 
-      posts.add(new Post(sentence, content, state, selectedMood, like));
+      posts.add(new Post(sentence, content, state, selectedMood));
 
       writeFrame.setVisible(false);
 

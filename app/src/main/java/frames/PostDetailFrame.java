@@ -54,8 +54,6 @@ public class PostDetailFrame extends JFrame {
     detailPanel.add(createMood());
     detailPanel.add(createDeleteButton());
     detailPanel.add(createModifyButton());
-    detailPanel.add(createLikeButton());
-    detailPanel.add(createLikeNumber());
     detailPanel.add(createGoBackButton());
 
     detailFrame.add(detailPanel);
@@ -142,27 +140,6 @@ public class PostDetailFrame extends JFrame {
       showContentPanel(mainPanel);
     });
     return deleteButton;
-  }
-
-  private JLabel createLikeButton() {
-    JLabel likeLabel = new JLabel(new ImageIcon("./app/src/main/img/heart.png"));
-    likeLabel.setBounds(920, 80, 48, 48);
-    likeLabel.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        post.addLikeCount();
-        detailFrame.setVisible(false);
-        JFrame postDetailFrame = new PostDetailFrame(posts, post, mainPanel, contentPanel);
-      }
-    });
-
-    return likeLabel;
-  }
-
-  private JLabel createLikeNumber() {
-    likeNumberLabel = new JLabel("좋아요 수: " + post.like());
-    likeNumberLabel.setBounds(900, 50, 100, 30);
-    return likeNumberLabel;
   }
 
   public JButton createGoBackButton() {

@@ -6,35 +6,46 @@ import panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class PostDetailFrame extends JFrame {
   private List<Post> posts;
   private Post post;
-  private JPanel mainPanel;
 
   private JFrame detailFrame;
-  private JPanel detailPanel;
 
-  private String[] mood = {"인생", "동기부여", "이별", "희망"};
+  private JPanel mainPanel;
+  private JPanel detailPanel;
   private JPanel contentPanel;
 
-  public PostDetailFrame(List<Post> posts, Post post, JPanel mainPanel, JPanel contentPanel) {
+  private String[] mood = {"인생", "동기부여", "이별", "희망"};
+  private JLabel likeNumberLabel;
+
+  public PostDetailFrame(List<Post> posts,
+                         Post post,
+                         JPanel mainPanel,
+                         JPanel contentPanel) {
     this.posts = posts;
     this.post = post;
     this.mainPanel = mainPanel;
     this.contentPanel = contentPanel;
 
-    detailFrame = new JFrame();
-    detailFrame.setSize(1000, 1000);
-    detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    initDetailFrame();
 
     loadContent();
 
     detailFrame.setVisible(true);
   }
 
-  private void loadContent() {
+  public void initDetailFrame() {
+    detailFrame = new JFrame();
+    detailFrame.setSize(1000, 1000);
+    detailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+  }
+
+  public void loadContent() {
     detailPanel = new ImagePanel(new ImageIcon(
         "./app/src/main/img/detailBackground.jpeg").getImage());
     detailPanel.setLayout(null);
@@ -43,13 +54,15 @@ public class PostDetailFrame extends JFrame {
     detailPanel.add(createMood());
     detailPanel.add(createDeleteButton());
     detailPanel.add(createModifyButton());
+    detailPanel.add(createLikeButton());
+    detailPanel.add(createLikeNumber());
     detailPanel.add(createGoBackButton());
 
     detailFrame.add(detailPanel);
   }
 
-  private JLabel createContent() {
-    JLabel informationLabel = new JLabel("글귀에 대한 정보(출처)에 대한 상세 페이지 입니다." +
+  public JLabel createContent() {
+    JLabel informationLabel = new JLabel("글귀의 정보(출처)에 대한 상세 페이지 입니다." +
         " (어디서 읽었는지, 누가 말 했는지) ");
     informationLabel.setFont(new Font("Serif", Font.BOLD, 18));
     informationLabel.setBounds(10, 20, 800, 20);
@@ -69,7 +82,7 @@ public class PostDetailFrame extends JFrame {
     return contentLabel;
   }
 
-  private JLabel createMood() {
+  public JLabel createMood() {
     String mood = post.mood();
     JLabel moodLabel = new JLabel("카테고리: " + mood);
     moodLabel.setFont(new Font("Serif", Font.BOLD, 15));
@@ -77,7 +90,7 @@ public class PostDetailFrame extends JFrame {
     return moodLabel;
   }
 
-  private JButton createModifyButton() {
+  public JButton createModifyButton() {
     JButton modifyButton = new JButton("수정하기");
     modifyButton.setBounds(730, 800, 100, 40);
     modifyButton.addActionListener(event -> {
@@ -118,7 +131,7 @@ public class PostDetailFrame extends JFrame {
     return modifyButton;
   }
 
-  private JButton createDeleteButton() {
+  public JButton createDeleteButton() {
     JButton deleteButton = new JButton("삭제하기");
     deleteButton.setBounds(850, 800, 100, 40);
     deleteButton.addActionListener(event -> {
@@ -131,7 +144,28 @@ public class PostDetailFrame extends JFrame {
     return deleteButton;
   }
 
-  private JButton createGoBackButton() {
+  private JLabel createLikeButton() {
+    JLabel likeLabel = new JLabel(new ImageIcon("./app/src/main/img/heart.png"));
+    likeLabel.setBounds(920, 80, 48, 48);
+    likeLabel.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        post.addLikeCount();
+        detailFrame.setVisible(false);
+        JFrame postDetailFrame = new PostDetailFrame(posts, post, mainPanel, contentPanel);
+      }
+    });
+
+    return likeLabel;
+  }
+
+  private JLabel createLikeNumber() {
+    likeNumberLabel = new JLabel("좋아요 수: " + post.like());
+    likeNumberLabel.setBounds(900, 50, 100, 30);
+    return likeNumberLabel;
+  }
+
+  public JButton createGoBackButton() {
     JButton goBackButton = new JButton("뒤로가기");
     goBackButton.setBounds(20, 800, 100, 40);
     goBackButton.addActionListener(event -> {
@@ -142,7 +176,7 @@ public class PostDetailFrame extends JFrame {
     return goBackButton;
   }
 
-  private void showContentPanel(JPanel mainPanel) {
+  public void showContentPanel(JPanel mainPanel) {
     mainPanel.setOpaque(false);
     contentPanel.removeAll();
     contentPanel.add(mainPanel);

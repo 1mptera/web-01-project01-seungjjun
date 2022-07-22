@@ -19,5 +19,6 @@ class StarRatingCalculatorTest {
         "15.0")));
 
     assertEquals("3.0", starRatingCalculator.computeAverageStarRating("5"));
+    assertEquals("3.8", starRatingCalculator.computeAverageStarRating("4"));
   }
 }

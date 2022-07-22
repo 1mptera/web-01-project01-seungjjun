@@ -21,10 +21,32 @@ public class MoodButtonFrame {
   public void run() {
     initFrame();
 
-    setButtonsLayout();
+    initButtons();
+
+    eachButtonActionListener();
 
     buttonFrame.setVisible(true);
+  }
 
+  public void initFrame() {
+    buttonFrame = new JFrame("기분에 맞는 버튼을 선택하세요");
+    buttonFrame.setSize(500, 500);
+    buttonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
+
+  public void initButtons() {
+    moodButtonsPanel = new ImagePanel(
+        new ImageIcon("./app/src/main/img/background.jpeg").getImage());
+
+    buttonFrame.add(moodButtonsPanel);
+
+    createLifeButton();
+    createMotivationButton();
+    createBreakupButton();
+    createHopeButton();
+  }
+
+  public void eachButtonActionListener() {
     lifeButton.addActionListener(event -> {
       showDailySentenceFrame(lifeButton);
     });
@@ -50,24 +72,6 @@ public class MoodButtonFrame {
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public void initFrame() {
-    buttonFrame = new JFrame("기분에 맞는 버튼을 선택하세요");
-    buttonFrame.setSize(500, 500);
-    buttonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  }
-
-  public void setButtonsLayout() {
-    moodButtonsPanel = new ImagePanel(
-        new ImageIcon("./app/src/main/img/background.jpeg").getImage());
-
-    buttonFrame.add(moodButtonsPanel);
-
-    createLifeButton();
-    createMotivationButton();
-    createBreakupButton();
-    createHopeButton();
   }
 
   private void createLifeButton() {

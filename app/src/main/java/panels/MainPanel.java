@@ -21,6 +21,7 @@ public class MainPanel extends JPanel {
     this.contentPanel = contentPanel;
 
     this.setLayout(new GridLayout(0, 1));
+
     sentencePanel();
   }
 

@@ -40,16 +40,15 @@ public class DailySentence extends JFrame {
   private MainPanel mainPanel;
 
   private String mood;
+  private String like;
 
   DailySentence(String mood) throws FileNotFoundException {
+    this.mood = mood;
+
     randomSentencePanel = new RandomSentencePanel();
     randomImageDisplayer = new RandomImageDisplayer();
     random = new Random();
-
-
     book = new Book();
-
-    this.mood = mood;
 
     posts = new ArrayList<>();
     books = new ArrayList<>();
@@ -89,16 +88,6 @@ public class DailySentence extends JFrame {
     initContentPanel(mood);
   }
 
-  public void initContentPanel(String mood) {
-    contentPanel = new JPanel();
-    contentPanel.setBounds(0, 100, 1000, 900);
-    contentPanel.setOpaque(false);
-
-    randomSentencePanel.randomSentence(posts, storages, mood, totalPanel);
-
-    totalPanel.add(contentPanel);
-  }
-
   public void initMenuButtons() {
     menuPanel = new JPanel();
     menuPanel.setBounds(230, 10, 500, 500);
@@ -107,8 +96,18 @@ public class DailySentence extends JFrame {
 
     menuPanel.add(createMainButton());
     menuPanel.add(createWritingButton());
-    menuPanel.add(createBestsellerButton());
+    menuPanel.add(createBookRecommendButton());
     menuPanel.add(createStorageButton());
+  }
+
+  public void initContentPanel(String mood) {
+    contentPanel = new JPanel();
+    contentPanel.setBounds(0, 100, 1000, 900);
+    contentPanel.setOpaque(false);
+
+    randomSentencePanel.randomSentence(posts, storages, mood, totalPanel);
+
+    totalPanel.add(contentPanel);
   }
 
   public JButton createMainButton() {
@@ -125,13 +124,13 @@ public class DailySentence extends JFrame {
   public JButton createWritingButton() {
     JButton writingButton = new JButton("글귀 작성하기");
     writingButton.addActionListener(event -> {
-      JFrame writingPostFrame = new WritingPostFrame(posts, mainPanel, contentPanel, menuPanel);
+      JFrame writingPostFrame = new WritingPostFrame(posts, mainPanel, contentPanel, menuPanel, like);
     });
 
     return writingButton;
   }
 
-  public JButton createBestsellerButton() {
+  public JButton createBookRecommendButton() {
     JButton bestsellerButton = new JButton("책 추천 순위");
     bestsellerButton.addActionListener(event -> {
       JPanel bookRankingPanel = new BookRankingPanel(book, books, contentPanel);

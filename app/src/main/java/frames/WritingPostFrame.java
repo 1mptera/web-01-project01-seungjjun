@@ -19,18 +19,21 @@ public class WritingPostFrame extends JFrame {
   private JPanel mainPanel;
   private JPanel contentPanel;
   private JPanel menuPanel;
+  private String like;
 
   private String[] mood = {"인생", "동기부여", "이별", "희망"};
 
   public WritingPostFrame(List<Post> posts,
                           JPanel mainPanel,
                           JPanel contentPanel,
-                          JPanel menuPanel) {
+                          JPanel menuPanel,
+                          String like) {
 
     this.posts = posts;
     this.mainPanel = mainPanel;
     this.contentPanel = contentPanel;
     this.menuPanel = menuPanel;
+    this.like = like;
 
     initFrame();
 
@@ -75,7 +78,7 @@ public class WritingPostFrame extends JFrame {
       String state = "EXISTENCE";
       String selectedMood = String.valueOf(moodComboBox.getSelectedItem());
 
-      posts.add(new Post(sentence, content, state, selectedMood));
+      posts.add(new Post(sentence, content, state, selectedMood, like));
 
       writeFrame.setVisible(false);
 

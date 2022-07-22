@@ -43,6 +43,7 @@ public class PostLoader {
         postInformation[0],
         postInformation[1],
         postInformation[2],
-        postInformation[3]);
+        postInformation[3],
+        postInformation[4]);
   }
 }
